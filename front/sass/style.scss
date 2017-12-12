@@ -1,16 +1,25 @@
+@import "fonts";
+
 body {
     margin: 0;
+    a, h2 {
+        font-family: SourceSansPro;
+        font-weight: 600;
+    }
     a {
         text-decoration: none;
         text-decoration-color: none;
     }
+
     input[type=text], input[type=password] {
         border: none;
         border-bottom: 1.5px solid #ccc;
         background-color: transparent;
+        color: #ffffff;
         height: 30px;
         padding-left: 10px;
         width: 50%;
+        font-size: 18px;
     }
 
     input[type=submit] {
@@ -27,7 +36,7 @@ body {
     textarea:focus,
     button:focus {
         outline: none;
-        border-bottom: 1.5px solid #000000;
+        /* border-bottom: 1.5px solid #000000; */
     }
     main {
         background-image: url('../../images/background.jpg');
@@ -71,13 +80,12 @@ body {
                                 }
                             }
                         }
-                    }  
-                }
-                
+                    } // wrapper-btn-login
+                } // container
             } // section-choix-login
         
             &.section-champs-login {
-                flex-grow: 2;
+                flex-grow: 3;
                 background-color: #000000;
                 opacity: .9;
                 .container {
@@ -86,12 +94,12 @@ body {
                     h2 {
                         text-align: center;
                         color: #ffffff;
-                        font-size: 2em;
+                        font-size: 2.5em;
                     }
     
                     .wrapper-form {
                         position: absolute;
-                        width: 100%;
+                        width: 70%;
                         top: 50%;
                         left: 50%;
                         transform: translateX(-50%) translateY(-50%);
@@ -103,17 +111,13 @@ body {
                                 }
                             }
                         }
-                    }
-                }
+                    } // wrapper-form
+                } // container
             } // section-champs-login
         
-            &.section-background {
-                flex-grow: 2;
-            } // section-background
-
             .container {
                 padding: 20px;
             }
         }
     } // main
-}
+} // body
