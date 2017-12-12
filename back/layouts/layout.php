@@ -7,11 +7,13 @@
 </head>
 <body>
 	<?php include($view_path); ?>
-  <?php
-    /* foreach ($script_tab as $key => $link) {
-      # code...
-    } */
-  ?>
-  <script src='./js/main.js'></script>
+
+
+  <style>
+    
+  </style>
+  <script src='./dists/js/jquery-3.2.1.min.js'></script>
+  <script src='http://localhost:3000/socket.io/socket.io.js'></script>
+  <script src='./dists/js/main.js'></script>
 </body>
 </html>
