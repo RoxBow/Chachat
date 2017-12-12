@@ -3,3 +3,4 @@ assets/css/*/*.css
 assets/css/*.css
 .sass-cache/
 .vscode/
+.idea/
