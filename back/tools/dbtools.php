@@ -5,7 +5,7 @@
 		global $link;
 
 		if (empty($link))
-			$link = mysqli_connect('localhost', 'root', '', 'cinema') or die (mysqli_connect_error());
+			$link = mysqli_connect('localhost', 'root', 'root', 'chat') or die (mysqli_connect_error());
 		$result = mysqli_query($link, $query) or die (mysqli_error($link));
 		return $result;
 	}

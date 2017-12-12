@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <title><?php echo ucfirst($action); ?></title>
-  <link rel="stylesheet" href=<?= $css_path ?>>
+  <link rel="stylesheet" href="<?= $css_path ?>">
 </head>
 <body>
 	<?php include($view_path); ?>

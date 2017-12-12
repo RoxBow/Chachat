@@ -5,5 +5,5 @@ $routes = [	'home' => 'HomeController',
 			'login' => 'AuthController',
 			'register_form' => 'AuthController',
 			'register' => 'AuthController',
-			'chat-home' => 'ChatController'
+			'room_publique' => 'ChatController'
 		];
