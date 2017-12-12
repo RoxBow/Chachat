@@ -1,0 +1,119 @@
+body {
+    margin: 0;
+    a {
+        text-decoration: none;
+        text-decoration-color: none;
+    }
+    input[type=text], input[type=password] {
+        border: none;
+        border-bottom: 1.5px solid #ccc;
+        background-color: transparent;
+        height: 30px;
+        padding-left: 10px;
+        width: 50%;
+    }
+
+    input[type=submit] {
+        height: 40px;
+        width: 200px;
+        border-radius: 8px;
+        margin-right: 5px;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+    
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        outline: none;
+        border-bottom: 1.5px solid #000000;
+    }
+    main {
+        background-image: url('../../images/background.jpg');
+        background-size: cover;
+        display: flex;
+        section {
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+
+            &.section-choix-login {
+                flex-grow: 1;
+                align-self: stretch;
+                background-color: #000000;
+                .container {
+                    position: relative;
+                    height: 100vh;
+                    .logo {
+                        text-align: center;
+                        color: #ffffff;
+                    }
+                    .wrapper-btn-login {
+                        position: absolute;
+                        width: 60%;
+                        top: 50%;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(-50%);
+                        .wrapper-login, .wrapper-sign-in, .wrapper-sign-guest {
+                            font-size: 22px;
+                            margin: 12px auto;
+                            width: 60%;
+                            a {
+                                color: #ffffff;
+                                white-space: nowrap;
+                                &.selected {
+                                    border-bottom: 2px solid white;
+                                    padding-bottom: 5px;
+                                }
+                                i {
+                                    margin-right: 5px;
+                                }
+                            }
+                        }
+                    }  
+                }
+                
+            } // section-choix-login
+        
+            &.section-champs-login {
+                flex-grow: 2;
+                background-color: #000000;
+                opacity: .9;
+                .container {
+                    position: relative;
+                    height: 100vh;
+                    h2 {
+                        text-align: center;
+                        color: #ffffff;
+                        font-size: 2em;
+                    }
+    
+                    .wrapper-form {
+                        position: absolute;
+                        width: 100%;
+                        top: 50%;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(-50%);
+                        form {
+                            p {
+                                text-align: center;
+                                input {
+                                    margin: 15px auto;
+                                }
+                            }
+                        }
+                    }
+                }
+            } // section-champs-login
+        
+            &.section-background {
+                flex-grow: 2;
+            } // section-background
+
+            .container {
+                padding: 20px;
+            }
+        }
+    } // main
+}

@@ -1,82 +1,63 @@
-<!doctype html>
-<html>
-
+<!DOCTYPE html>
+<html lang="fr">
 <head>
-    <title>Game card</title>
-    <style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Chachat</title>
 
-        html, body {
-            position: relative;
-            height: 100%;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        main {
-            padding: 30px;
-            font-family: 'Arial';
-            position: relative;
-            height: 100%;
-        }
-
-        button {
-            padding: 15px;
-            border: 2px solid #000;
-            background: none;
-        }
-
-        #listRoom {
-            position: absolute;
-            right: 5%;
-        }
-
-        #infoUsers, 
-        #infoRooms {
-            position: absolute;
-            bottom: 5%;
-            left: 5%;
-        }
-        
-        #infoRooms { left: 18%; }
-
-    </style>
+    <link rel="stylesheet" href="./font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="./assets/css/style.css">
 </head>
-
 <body>
     <main>
-        <button id="createUsername">Connecter</button>
-        <button id="createRoom">Creer room</button>
+        <section class="section-choix-login">
+            <div class="container">
+                <div class="logo">
+                    <i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
+                </div>
+                <div class="wrapper-btn-login">
+                    <div class="wrapper-login">
+                        <a href="#" class="selected">
+                            <i class="fa fa-user fa-3x" aria-hidden="true"></i> Login
+                        </a>
+                    </div>
+                    <div class="wrapper-sign-in">
+                        <a href="#">
+                            <i class="fa fa-user fa-3x" aria-hidden="true"></i> S'enregistrer
+                        </a>
+                    </div>
+                    <div class="wrapper-sign-guest">
+                        <a href="#">
+                            <i class="fa fa-user fa-3x" aria-hidden="true"></i> Invité
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="section-champs-login">
+            <div class="container">
+                <h2>ChaChat</h2>
 
-        <ul id="listRoom" style="display: none;">
-            <li>ROOM :</li>
-        </ul>
-        <p id="currentRoom"></p>
-        <table style="display: none;">
-            <tr>
-                <th>Joueur 1</th>
-                <th>Joueur 2</th>
-            </tr>
-            <tr>
-                <td>
-                    <button id="joinPlay">Rejoindre</button>
-                </td>
-            </tr>
-            <tr id="listPlayer">
-            </tr>
-        </table>
-
-        <button id="infoUsers">Info user</button>
-        <button id="infoRooms">Info rooms</button>
-    </main>
+                <div class="wrapper-form">
+                    <form method="post" action="traitement.php">
+                        <p>
+                            <input type="text" name="pseudo" id="pseudo" placeholder="Pseudo"/>
+                            <br/>
+                            <input type="password" name="password" id="password" placeholder="Mot de passe"/>
+                            <br/>
+                            <input type="submit" value="Valider" />
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section class="section-background"></section>
+    </main>    
 
     <!-- ******* script ******* -->
     <script src="/socket.io/socket.io.js"></script>
     <script src="js/jquery-3.2.1.min.js"></script>
     <script type="module" src="js/main.js"></script>
 </body>
-
 </html>
