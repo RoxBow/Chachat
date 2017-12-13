@@ -3,7 +3,7 @@
 
 body {
     margin: 0;
-    a, h2 {
+    a, h2, p {
         font-family: SourceSansPro;
         font-weight: 600;
     }
@@ -13,6 +13,9 @@ body {
     a {
         text-decoration: none;
         text-decoration-color: none;
+    }
+    i.fa {
+        color: $couleur-icones;
     }
 
     input[type=text], input[type=password], input[type=email] {
@@ -151,24 +154,36 @@ body {
         } // main.wrapper-page-login
 
         &.wrapper-page-room {
+            background-color: rgb(245, 245, 245);
             display: flex;
             .section-room-friends {
                 flex-grow: 1;
                 height: 100vh;
                 background-color: $couleur-background-section;
                 .wrapper-onglets {
+                    background-color: white;
+                    width: 100%;
                     ul {
                         display: flex;
+                        margin-top: 0;
                         list-style: none;
-                        align-content: stretch;
                         li {
-                            background-color: #ccc;
-                            font-size: 24px;
+                            background-color: #9B0812;
+                            font-size: 18px;
+                            line-height: 1.7em;
+                            padding: 10px 0px;
+                            width: 50%;
+                            text-align: center;
+                            
+                            &.selected {
+                                background-color: $couleur-background-onglet-actif;
+                                box-shadow: 0px 1px 5px 0px #000000;
+                            }
                             a {
                                 color: $couleur-textes;
                             }
-                        }
-                    }
+                        } // li
+                    } // ul
                     
                     
                 } // wrapper-onglets
@@ -177,7 +192,42 @@ body {
             .section-chat {
                 flex-grow: 4;
                 .header-chat {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 10px 20px;
+                    height: 30px;
+                    background: $couleur-background-header-chat;
 
+                    .wrapper-header-left {
+                        display: flex;
+                        align-items: center;
+                        color: $couleur-textes;
+
+                        p {
+                            margin-right: 20px;
+                        }
+                        .pseudo-user {
+                            font-size: 18px;
+                        }
+                    }
+                    
+                    .wrapper-header-right {
+                        position: relative;
+                        span {
+                            margin-right: 10px;
+                            cursor: pointer;
+                        }
+                        input {
+                            width: 80%;
+                        }
+                        i.fa-search {
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            right: 20px;
+                            cursor: text;
+                        }
+                    }
                 } // header-chat
 
                 .wrapper-chat {
