@@ -19,7 +19,7 @@ switch ($action) {
 		$user->id = 1;
 		$user->hydrate();
 		
-		var_dump($user);
+		//var_dump($user);
         break;
 
     default:

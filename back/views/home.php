@@ -1,4 +1,4 @@
-<main>
+<main class="wrapper-page-login">
 <section class="section-choix-login">
 	<div class="container">
 		<div class="logo">
@@ -27,7 +27,7 @@
 	<div class="container">
 		<h2>ChaChat</h2>
 
-		<div class="wrapper-form">
+		<div class="wrapper-form wrapper-form-login">
 			<form method="post" action="traitement.php">
 				<p>
 					<input type="text" name="pseudo" id="pseudo" placeholder="Pseudo"/>
@@ -38,6 +38,19 @@
 				</p>
 			</form>
 		</div>
+		<div class="wrapper-form wrapper-form-register">
+			<form method="post" action="traitement.php">
+				<p>
+					<input type="email" name="email" id="email" placeholder="Email"/>
+					<br/>
+					<input type="text" name="pseudo" id="pseudo" placeholder="Pseudo"/>
+					<br/>
+					<input type="password" name="password" id="password" placeholder="Mot de passe"/>
+					<br/>
+					<input type="submit" value="Valider" />
+				</p>
+			</form>
+		</div>
 	</div>
 </section>
-</main>
+</main>    
