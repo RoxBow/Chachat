@@ -1,0 +1,8 @@
+@import "fonts";
+@import "variables";
+@import "style-desktop";
+
+
+@media (max-width: 768px) { 
+    @import "style-mobile";
+}

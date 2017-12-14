@@ -1,0 +1,243 @@
+@import "fonts";
+@import "variables";
+
+body {
+    margin: 0;
+    a, h2, p {
+        font-family: SourceSansPro;
+        font-weight: 400;
+    }
+    ul {
+        padding: 0;
+    }
+    a {
+        text-decoration: none;
+        text-decoration-color: none;
+    }
+    i.fa {
+        color: $couleur-icones;
+    }
+
+    input[type=text], input[type=password], input[type=email] {
+        border: none;
+        border-bottom: 1.5px solid $couleur-bordures;
+        background-color: transparent;
+        color: $couleur-textes;
+        height: 30px;
+        padding-left: 10px;
+        width: 50%;
+        font-size: 18px;
+    }
+
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover, 
+    input:-webkit-autofill:focus
+    input:-webkit-autofill {
+        border: none;
+        border-bottom: 1.5px solid $couleur-bordures;
+        -webkit-text-fill-color: $couleur-textes;
+        transition: background-color 5000s ease-in-out 0s;
+    }
+
+    input[type=submit] {
+        height: 40px;
+        width: 200px;
+        border-radius: 8px;
+        margin-right: 5px;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+    
+    input:focus,
+    select:focus,
+    textarea:focus,
+    button:focus {
+        outline: none;
+        /* border-bottom: 1.5px solid #000000; */
+    }
+    main {
+        &.wrapper-page-login {
+            background-size: cover;
+            display: flex;
+            section {
+                margin: 0;
+                padding: 0;
+                height: 100vh;
+    
+                &.section-choix-login {
+                    flex-grow: 2;
+                    align-self: stretch;
+                    background-color: $couleur-background-section;
+
+                    .container {
+                        position: relative;
+                        height: 90vh;
+                        
+                        .logo {
+                            text-align: center;
+                            color: #ffffff;
+                            margin-bottom: 40px;
+                        }
+                        .wrapper-btn-login {
+                            position: absolute;
+                            width: 100%;
+                            top: 50%;
+                            left: 50%;
+                            transform: translateX(-50%) translateY(-50%);
+
+                            .wrapper-login, .wrapper-sign-in, .wrapper-sign-guest {
+                                font-size: 20px;
+                                margin: 12px auto;
+                                width: 40%;
+                                a {
+                                    color: $couleur-textes;
+                                    white-space: nowrap;
+                                    &.selected {
+                                        border-bottom: 2px solid $couleur-bordure-selected;
+                                        padding-bottom: 5px;
+                                    }
+                                    i {
+                                        margin-right: 5px;
+                                    }
+                                }
+                            }
+                        } // wrapper-btn-login
+                    } // container
+                } // section-choix-login
+            
+                &.section-champs-login {
+                    flex-grow: 4;
+                    background-color: $couleur-background-section-login;
+                    .container {
+                        position: relative;
+                        height: 90vh;
+                        h2 {
+                            text-align: center;
+                            color: $couleur-titre;
+                            font-size: 2.5em;
+                        }
+        
+                        .wrapper-form {
+                            position: absolute;
+                            width: 70%;
+                            top: 50%;
+                            left: 50%;
+                            transform: translateX(-50%) translateY(-50%);
+                            form {
+                                p {
+                                    text-align: center;
+                                    input {
+                                        margin: 15px auto;
+                                    }
+                                }
+                            }
+                        } // wrapper-form
+
+                        .wrapper-form-register {
+                            display: none;
+                        }
+                    } // container
+                } // section-champs-login
+            
+                .container {
+                    padding: 20px;
+                }
+            }
+        } // main.wrapper-page-login
+
+        &.wrapper-page-room {
+            background-color: rgb(245, 245, 245);
+            display: flex;
+            .section-room-friends {
+                flex-grow: 1;
+                height: 100vh;
+                background-color: $couleur-background-section;
+                .wrapper-onglets {
+                    background-color: white;
+                    width: 100%;
+                    ul {
+                        display: flex;
+                        margin-top: 0;
+                        list-style: none;
+                        li {
+                            background-color: #9B0812;
+                            font-size: 18px;
+                            line-height: 1.7em;
+                            padding: 10px 0px;
+                            width: 50%;
+                            text-align: center;
+                            
+                            &.selected {
+                                background-color: $couleur-background-onglet-actif;
+                                box-shadow: 0px 1px 5px 0px #000000;
+                            }
+                            a {
+                                color: $couleur-textes;
+                            }
+                        } // li
+                    } // ul
+                } // wrapper-onglets
+            } // section-room-friends
+
+            .section-chat {
+                flex-grow: 4;
+                .header-chat {
+                    display: flex;
+                    justify-content: space-between;
+                    padding: 10px 20px;
+                    height: 30px;
+                    background: $couleur-background-header-chat;
+
+                    .wrapper-header-left {
+                        display: flex;
+                        align-items: center;
+                        color: $couleur-textes;
+
+                        p {
+                            margin-right: 20px;
+                        }
+                        .pseudo-user {
+                            font-size: 18px;
+                        }
+                    }
+                    
+                    .wrapper-header-right {
+                        position: relative;
+                        span {
+                            margin-right: 10px;
+                            cursor: pointer;
+                        }
+                        input {
+                            width: 80%;
+                        }
+                        i.fa-search {
+                            position: absolute;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            right: 20px;
+                            cursor: text;
+                        }
+                    }
+                } // header-chat
+
+                .wrapper-game {
+                    display: inline-block;
+                    background: #9B0812;
+                    width: 50%;
+                    margin-right: -4px;
+                }
+
+                .wrapper-chat {
+                    display: inline-block;
+                    background: #000000;
+                    width: 50%;
+                    ul {
+                        li {
+                            list-style: none;
+                        }
+                    }
+                } // wrapper-chat
+            } // section-chat
+        } // main.wrapper-page-room
+    } // main
+} // body

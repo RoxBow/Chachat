@@ -22,7 +22,7 @@ else
 
 // VIEW
 $view_path = 'views/'.$action.'.php';
-$css_path = './dists/css/style.css';
+$css_path = './dists/css/index.css';
 $fontawesome_path = './dists/font-awesome/css/font-awesome.min.css';
 
 if (is_file($view_path))
