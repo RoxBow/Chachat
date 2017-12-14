@@ -1,11 +1,11 @@
 module.exports = function (grunt) {
 
-  let frontPath = 'front/';
+  let path = 'back/';
 
   grunt.initConfig({
     watch: {
       css: {
-        files: [frontPath+'sass/*.scss'],
+        files: [path+'dists/sass/*.scss'],
         tasks: ['sass:dist']
       },
     },
@@ -17,9 +17,9 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          cwd: frontPath+'sass/',
+          cwd: path+'dists/sass/',
           src: ['*.scss'],
-          dest: frontPath+'./css/',
+          dest: path+'dists/css/',
           ext: '.css'
       }]
       }

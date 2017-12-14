@@ -13,15 +13,6 @@ switch ($action) {
 		//preparer des valeur pour la vue
 		$welcome_message = 'Mon premier FrameWork !!!';
 
-		
-
-		$user = new User();
-		$user->id = 2;
-		$user->hydrate();
-		
-		//var_dump($user);
-
-		
         break;
 
     default:
