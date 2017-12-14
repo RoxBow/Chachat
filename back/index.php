@@ -2,10 +2,12 @@
 require_once('tools/tools.php');
 // ROUTING
 require_once('routes.php');
-if (empty($_GET['action']))
+
+if (empty($_GET['action'])){
 	$action = 'home';
-else
+} else{
 	$action = $_GET['action'];
+}
 
 // CONTROLLER
 if(!array_key_exists($action, $routes))
@@ -27,3 +29,4 @@ if (is_file($view_path))
 	include('layouts/layout.php');
 else
 	error404('view missing : '.$view_path);
+	

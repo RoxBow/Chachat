@@ -16,10 +16,12 @@ switch ($action) {
 		
 
 		$user = new User();
-		$user->id = 1;
+		$user->id = 2;
 		$user->hydrate();
 		
 		//var_dump($user);
+
+		
         break;
 
     default:

@@ -65,5 +65,9 @@ Class Akham{
         }
         // si on a pas de valeur pour la pk on INSERT
     }
+
+    public function thisUser(){
+        
+    }
 }
 

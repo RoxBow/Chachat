@@ -28,7 +28,7 @@
 		<h2>ChaChat</h2>
 
 		<div class="wrapper-form wrapper-form-login">
-			<form method="post" action="traitement.php">
+			<form method="post" action="?action=login">
 				<p>
 					<input type="text" name="pseudo" id="pseudo" placeholder="Pseudo"/>
 					<br/>
@@ -39,7 +39,7 @@
 			</form>
 		</div>
 		<div class="wrapper-form wrapper-form-register">
-			<form method="post" action="traitement.php">
+			<form method="post" action="AuthController.php">
 				<p>
 					<input type="email" name="email" id="email" placeholder="Email"/>
 					<br/>
