@@ -1,11 +1,11 @@
-@import "fonts";
+@import "_fonts";
 @import "variables";
 
 body {
     margin: 0;
     a, h2, p {
         font-family: SourceSansPro;
-        font-weight: 600;
+        font-weight: 400;
     }
     ul {
         padding: 0;
@@ -47,7 +47,6 @@ body {
     }
     main {
         &.wrapper-page-login {
-            background-image: url('../images/background.jpg');
             background-size: cover;
             display: flex;
             section {
@@ -114,8 +113,7 @@ body {
             
                 &.section-champs-login {
                     flex-grow: 3;
-                    background-color: $couleur-background-section;
-                    opacity: .9;
+                    background-color: $couleur-background-section-login;
                     .container {
                         position: relative;
                         height: 100vh;
@@ -184,8 +182,6 @@ body {
                             }
                         } // li
                     } // ul
-                    
-                    
                 } // wrapper-onglets
             } // section-room-friends
 
@@ -230,15 +226,24 @@ body {
                     }
                 } // header-chat
 
+                .wrapper-game {
+                    display: inline-block;
+                    background: #9B0812;
+                    width: 50%;
+                    margin-right: -4px;
+                }
+
                 .wrapper-chat {
-                    padding: 20px;
+                    display: inline-block;
+                    background: #000000;
+                    width: 50%;
                     ul {
                         li {
                             list-style: none;
                         }
                     }
                 } // wrapper-chat
-            }
+            } // section-chat
         } // main.wrapper-page-room
     } // main
 } // body
