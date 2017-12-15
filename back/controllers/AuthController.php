@@ -9,16 +9,16 @@ switch ($action) {
         break;
     
     case 'login':
-        $pseudo = htmlspecialchars($_POST["pseudo"]);
+        $pseudonyme = htmlspecialchars($_POST["pseudo"]);
 
         $user = new User();
-		$user->id = 2;
+		$user->pseudo = $pseudonyme;
 		$user->hydrate();
         
         echo 'User: '.$user->pseudo.'<br>';
-        echo 'Password: '.$user->password;        
+        echo 'Password: '.$user->password.'<br>';        
         
-        start_session();
+        start_session($user);
         break;
         
     case 'register_form':
@@ -39,7 +39,7 @@ switch ($action) {
         break;
 }
 
-function start_session(){
+function start_session($a_user){
     // On définit un login et un mot de passe de base pour tester notre exemple. Cependant, vous pouvez très bien interroger votre base de données afin de savoir si le visiteur qui se connecte est bien membre de votre site
     $login_valide = "roxboww";
     $pwd_valide = "bendo";
@@ -47,9 +47,9 @@ function start_session(){
     // on teste si nos variables sont définies
     if (isset($_POST['pseudo']) && isset($_POST['password'])) {
         echo $_POST['pseudo'].'---'.$_POST['password'].'<br>';
-        echo $login_valide.'---'.$pwd_valide.'<br>';
+
         // on vérifie les informations du formulaire, à savoir si le pseudo saisi est bien un pseudo autorisé, de même pour le mot de passe
-        if ($login_valide == $_POST['pseudo'] && $pwd_valide == $_POST['password']) {
+        if ($a_user->pseudo == $_POST['pseudo'] && $a_user->password == $_POST['password']) {
             // dans ce cas, tout est ok, on peut démarrer notre session
 
             // on la démarre :)
@@ -65,7 +65,7 @@ function start_session(){
             // Le visiteur n'a pas été reconnu comme étant membre de notre site. On utilise alors un petit javascript lui signalant ce fait
             echo '<body onLoad="alert(\'Membre non reconnu...\')">';
             // puis on le redirige vers la page d'accueil
-            //echo '<meta http-equiv="refresh" content="0;URL=index.php?action=home">';
+            echo '<meta http-equiv="refresh" content="0;URL=index.php?action=home">';
         }
     }
     else {

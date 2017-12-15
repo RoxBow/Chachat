@@ -11,8 +11,7 @@ switch ($action) {
 		// faire des traitements
 
 		//preparer des valeur pour la vue
-		$welcome_message = 'Mon premier FrameWork !!!';
-
+		$welcome_message = 'Mon premier FrameWork !!!';		
         break;
 
     default:

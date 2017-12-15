@@ -30,7 +30,7 @@ Class Akham{
             die('fatal error: cannot hydrate without PK value');
         }
 
-        $query = "SELECT * FROM ".$this->table_name." WHERE ".$this->pk." = ".$this->{$this->pk};
+        $query = "SELECT * FROM ".$this->table_name." WHERE ".$this->pk." = '".$this->{$this->pk}."'";
         $entity = myFetchAssoc($query);
 
         foreach($entity as $field => $value){
