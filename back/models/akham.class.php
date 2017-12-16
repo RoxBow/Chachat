@@ -25,7 +25,7 @@ Class Akham{
     }
 
     public function hydrate(){
-        echo 'in<br>';
+
         if($this->{$this->pk} ==null){
             die('fatal error: cannot hydrate without PK value');
         }
