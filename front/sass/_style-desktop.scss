@@ -29,16 +29,6 @@ body {
         font-size: 18px;
     }
 
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover, 
-    input:-webkit-autofill:focus
-    input:-webkit-autofill {
-        border: none;
-        border-bottom: 1.5px solid $couleur-bordures;
-        -webkit-text-fill-color: $couleur-textes;
-        transition: background-color 5000s ease-in-out 0s;
-    }
-
     input[type=submit] {
         height: 40px;
         width: 200px;
@@ -65,59 +55,42 @@ body {
                 height: 100vh;
     
                 &.section-choix-login {
-                    flex-grow: 2;
+                    flex-grow: 1;
                     align-self: stretch;
                     background-color: $couleur-background-section;
 
                     .container {
                         position: relative;
-                        height: 90vh;
+                        height: 100vh;
                         
                         .logo {
                             text-align: center;
                             color: #ffffff;
-                            margin-bottom: 40px;
                         }
                         .wrapper-btn-login {
-                            position: absolute;
-                            width: 100%;
-                            top: 50%;
-                            left: 50%;
-                            transform: translateX(-50%) translateY(-50%);
-
+                            position: relative;
+                            &::after {
+                                content: "";
+                                width: 5px;
+                                height: 100%;
+                                position: absolute;
+                                right: -20px;
+                                top: 10px;
+                                background-color: $couleur-bordures;
+                            }
                             .wrapper-login, .wrapper-sign-in, .wrapper-sign-guest {
-                                font-size: 20px;
+                                font-size: 22px;
                                 margin: 12px auto;
-                                width: 40%;
+                                width: 50%;
                                 a {
                                     color: $couleur-textes;
                                     white-space: nowrap;
-                                    padding-bottom: 5px;
-                                    position: relative;
                                     &.selected {
                                         border-bottom: 2px solid $couleur-bordure-selected;
-                                        &:hover::after {
-                                            width: 0;
-                                        }
+                                        padding-bottom: 5px;
                                     }
                                     i {
                                         margin-right: 5px;
-                                    }
-
-                                    &::after {
-                                        content: '';
-                                        display: block;
-                                        position: absolute;
-                                        width: 0;
-                                        height: 2px;
-                                        bottom: -2px;
-                                        background: #ffffff;
-                                        transition: width .3s;
-                                    }
-                                    
-                                    &:hover::after {
-                                        width: 100%;
-                                        //transition: width .3s;
                                     }
                                 }
                             }
@@ -126,11 +99,11 @@ body {
                 } // section-choix-login
             
                 &.section-champs-login {
-                    flex-grow: 4;
+                    flex-grow: 3;
                     background-color: $couleur-background-section-login;
                     .container {
                         position: relative;
-                        height: 90vh;
+                        height: 100vh;
                         h2 {
                             text-align: center;
                             color: $couleur-titre;
@@ -200,7 +173,7 @@ body {
             } // section-room-friends
 
             .section-chat {
-                flex-grow: 1;
+                flex-grow: 4;
                 .header-chat {
                     display: flex;
                     justify-content: space-between;
@@ -240,95 +213,23 @@ body {
                     }
                 } // header-chat
 
+                .wrapper-game {
+                    display: inline-block;
+                    background: #9B0812;
+                    width: 50%;
+                    margin-right: -4px;
+                }
 
                 .wrapper-chat {
-                    display: flex;
-                    justify-content: space-between;
-                    .wrapper-game {
-                        height: 100vh;
-                        background: #9B0812;
-                        width: 40%;
-                    }
-
-                    .wrapper-area-chat {
-                        height: 100vh;
-                        background: #414040;
-                        width: 60%;
-                        padding: 10px;
-                        position: relative;
-                        ul {
-                            display: flex;
-                            flex-direction: column;
+                    display: inline-block;
+                    background: #000000;
+                    width: 50%;
+                    ul {
+                        li {
                             list-style: none;
-                            padding-bottom: 50px;
-
-                            li {
-                                margin: 10px 0;
-                                background-color: red;
-                                padding: 10px 15px;
-                                border-radius: 20px;
-                                border-bottom-left-radius: 5px;
-                                position: relative;
-                                width: 45%;
-
-                                &::after {
-                                    content: "";
-                                    position: absolute;
-                                    width: 0; 
-                                    height: 0; 
-                                    border-left: 10px solid transparent;
-                                    border-right: 10px solid transparent;
-                                    border-top: 8px solid red;
-                                    left: 10px;
-                                    bottom: -8px;
-                                }
-
-                                &.user-connected {
-                                    background-color: blue;
-                                    border-radius: 20px;
-                                    border-bottom-right-radius: 5px;
-                                    align-self: flex-end;
-
-                                    &::after {
-                                        content: "";
-                                        position: absolute;
-                                        width: 0; 
-                                        height: 0; 
-                                        border-left: 10px solid transparent;
-                                        border-right: 10px solid transparent;
-                                        border-top: 8px solid blue;
-                                        right: 10px;
-                                        left: inherit;
-                                        bottom: -8px;
-                                    }   
-                                } // user-connected
-                            } // li
-                        } // ul
-
-                        & > form {
-                            position: relative;
-
-                            &::before {
-                                content: '';
-                                height: .5px;
-                                width: 80%;
-                                top: -17px;
-                                left: 10%;
-                                background-color: white;
-                                position: absolute;
-                            }
-
-                            input[type="text"] {
-                                width: 65%;
-                            }
-
-                            input[type="submit"] {
-                                width: 30%;
-                            }
-                        } // form
-                    } // wrapper-area-chat
+                        }
+                    }
                 } // wrapper-chat
-                
             } // section-chat
         } // main.wrapper-page-room
     } // main

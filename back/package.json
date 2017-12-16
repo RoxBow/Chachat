@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "babel-core": "^6.26.0",
     "grunt": "^1.0.1",
     "grunt-babel": "^7.0.0",
     "grunt-contrib-sass": "^1.0.0",

@@ -24,18 +24,25 @@
             </div>
         </div>
 
-        <div class="wrapper-game">
-            <ul>dfsdf</ul>
-        </div>
-
         <div class="wrapper-chat">
-            <ul id="message-chat">
-            </ul>
+            <div class="wrapper-area-chat">
+                <ul id="message-chat">
+                    <li class='user-connected'>Hello</li>
+                    <li>Ca va ?</li>
+                    <li class='user-connected'>Très bien et toi ?</li>
+                    <li class='user-connected'>Très bien et toi ?</li>
+                    <li>Excellent !</li>
+                </ul>
 
-            <form>
-                <input type="text" id="m">
-                <input type="submit" value="Envoyer">
-            </form>
+                <form>
+                    <input type="text" id="m">
+                    <input type="submit" value="Envoyer">
+                </form>
+            </div>
+
+            <div class="wrapper-game">
+                <h2>SECTION JEUX SECTION JEUX SECTION JEUX SECTION JEUX SECTION JEUX</h2>
+            </div>
         </div>
 
     </section>

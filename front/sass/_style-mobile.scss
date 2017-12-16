@@ -1,0 +1,34 @@
+body {
+    main {
+
+        &.wrapper-page-login {
+            flex-direction: column;
+
+            section.section-choix-login {
+                .container {
+                    
+                    .wrapper-btn-login {
+                        &::after {
+                            content: none;
+                        }
+
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        transform: translateX(-50%) translateY(-50%);
+
+                        .fa-user {
+                            font-size: 2em;
+                        }
+                    }
+                } // container
+            } // section-choix-login
+
+            section.section-champs-login {
+                .container {
+                    height: 90vh;
+                }
+            }
+        } // wrapper-page-login
+    } // main
+}
