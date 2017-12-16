@@ -1,6 +1,14 @@
 @import "fonts";
 @import "variables";
 
+@mixin beforeNameRoom ($numberIcone) {
+    content: $numberIcone;
+    font-family: fontAwesome;
+    font-size: 14px;
+    margin-right: 5px;
+    margin-left: 10px;
+}
+
 body {
     margin: 0;
     a, h2, p {
@@ -9,10 +17,10 @@ body {
     }
     ul {
         padding: 0;
+        list-style: none;
     }
     a {
         text-decoration: none;
-        text-decoration-color: none;
     }
     i.fa {
         color: $couleur-icones;
@@ -169,7 +177,7 @@ body {
             background-color: rgb(245, 245, 245);
             display: flex;
             .section-room-friends {
-                flex-grow: 1;
+                width: 20%;
                 height: 100vh;
                 background-color: $couleur-background-section;
                 .wrapper-onglets {
@@ -186,6 +194,7 @@ body {
                             padding: 10px 0px;
                             width: 50%;
                             text-align: center;
+                            cursor: pointer;
                             
                             &.selected {
                                 background-color: $couleur-background-onglet-actif;
@@ -194,13 +203,96 @@ body {
                             a {
                                 color: $couleur-textes;
                             }
+
+                            &::after {
+                                content: '\f111';
+                                font-family: fontAwesome;
+                                font-size: 12px;
+                                color: #33cc33;
+                                margin-left: 5px;
+                            }
                         } // li
                     } // ul
                 } // wrapper-onglets
+
+                .wrapper-friends {
+                    display: none;
+
+                    .wrapper-online-friends, .wrapper-offline-friends {
+                        padding: 0 20px;
+                    } // wrapper-online-friends
+
+                    .header-wrapper-friends {
+                        h2, & > i {
+                            display: inline-block;
+                            color: #000000;
+                            cursor: pointer;
+                        }
+
+                        h2 {
+                            font-size: 22px;
+                        }
+                    } // header-wrapper-rooms
+                } // wrapper-friends
+
+                .wrapper-section-rooms {
+                    .wrapper-rooms {
+                        padding: 0 20px;
+
+                        .header-wrapper-rooms {
+                            h2, & > i {
+                                display: inline-block;
+                                color: #000000;
+                                cursor: pointer;
+                            }
+
+                            h2 {
+                                font-size: 22px;
+                            }
+                        } // header-wrapper-rooms
+
+                        .public-room {
+                            li {
+                                &:hover {
+                                    background-color: gray;
+                                }
+                                &::before {
+                                    @include beforeNameRoom('\f0ac');
+                                }
+                            } // li
+                        } // public-room
+
+                        .private-room {
+                            li {
+                                &:hover {
+                                    background-color: gray;
+                                }
+                                &::before {
+                                    @include beforeNameRoom('\f023');
+                                }
+                            } // li
+                        } // private-room
+
+                        .private-message-room {
+                            li {
+                                &:hover {
+                                    background-color: gray;
+                                }
+                                &::before {
+                                    @include beforeNameRoom('\f2b5');
+                                }
+
+                                a {
+                                    color: #000000;
+                                }
+                            } // li
+                        } // private-message-room
+                    } // wrapper-rooms
+                } // wrapper-section-room
             } // section-room-friends
 
             .section-chat {
-                flex-grow: 1;
+                width: 80%;
                 .header-chat {
                     display: flex;
                     justify-content: space-between;
@@ -244,14 +336,13 @@ body {
                 .wrapper-chat {
                     display: flex;
                     justify-content: space-between;
+                    height: 100vh;
                     .wrapper-game {
-                        height: 100vh;
                         background: #9B0812;
                         width: 40%;
                     }
 
                     .wrapper-area-chat {
-                        height: 100vh;
                         background: #414040;
                         width: 60%;
                         padding: 10px;
@@ -306,20 +397,14 @@ body {
                         } // ul
 
                         & > form {
-                            position: relative;
-
-                            &::before {
-                                content: '';
-                                height: .5px;
-                                width: 80%;
-                                top: -17px;
-                                left: 10%;
-                                background-color: white;
-                                position: absolute;
-                            }
+                            background-color: darkgray;
+                            position: absolute;
+                            width: 100%;
+                            left: 0;
+                            bottom: 0;
 
                             input[type="text"] {
-                                width: 65%;
+                                width: 60%;
                             }
 
                             input[type="submit"] {

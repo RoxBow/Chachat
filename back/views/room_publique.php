@@ -2,9 +2,80 @@
     <section class="section-room-friends">
         <div class="wrapper-onglets">
             <ul>
-                <li class="selected"><a href="#">Salons</a></li>
-                <li><a href="#">Amis</i></a></li>
+                <li class="onglet-rooms selected"><a href="#">Salons</a></li>
+                <li class="onglet-friends"><a href="#">Amis</i></a></li>
             </ul>
+        </div>
+
+        <div class="wrapper-section-rooms">
+            <div class="wrapper-rooms">
+                <div class="header-wrapper-rooms selected">
+                    <h2 class="title-room">Room public</h2>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </div>
+                
+                <ul class="rooms public-room">
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                </ul>
+            </div>
+            
+
+            <div class="wrapper-rooms">
+                <div class="header-wrapper-rooms selected">
+                    <h2 class="title-room">Room private</h2>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </div>
+                <ul class="rooms private-room"> 
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                </ul>
+            </div>
+
+            <div class="wrapper-rooms">
+                <div class="header-wrapper-rooms selected">
+                    <h2 class="title-room">Room private message</h2>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </div>
+                <ul class="rooms private-message-room">
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="wrapper-friends">
+            <div class="wrapper-online-friends">
+                <div class="header-wrapper-friends selected">
+                    <h2 class="title-online">Amis en ligne</h2>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </div>
+                <ul class="list-friends list-online-friends">
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                </ul>
+            </div>
+
+            <div class="wrapper-offline-friends">
+                <div class="header-wrapper-friends selected">
+                    <h2 class="title-offline">Amis hors-ligne</h2>
+                    <i class="fa fa-chevron-down" aria-hidden="true"></i>
+                </div>
+                <ul class="list-friends list-offline-friends">
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                    <li><a href="#">Despacito</a></li>
+                </ul>
+            </div>
         </div>
     </section>
 
