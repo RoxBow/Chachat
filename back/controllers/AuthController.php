@@ -9,14 +9,12 @@ switch ($action) {
         break;
     
     case 'login':
+        echo '<script>console.log("log in")</script>';
         $pseudonyme = htmlspecialchars($_POST["pseudo"]);
 
         $user = new User();
 		$user->pseudo = $pseudonyme;
-		$user->hydrate();
-        
-        echo 'User: '.$user->pseudo.'<br>';
-        echo 'Password: '.$user->password.'<br>';        
+		$user->hydrate();      
         
         start_session($user);
         break;
@@ -26,15 +24,22 @@ switch ($action) {
         break;
     
     case 'register':
+        echo '<script>console.log("sign in")</script>';
+    
+        $email = htmlspecialchars($_POST["email"]);
+        $pseudonyme = htmlspecialchars($_POST["pseudo"]);
+        $password = htmlspecialchars($_POST["password"]);
         //Register a new user in database
 
-        /* $a = new User();
-        $a->pseudo = 'yeat';
-        $a->password = 'yeatword2az2az25';
-        $a->email = 'yeat@yeat.com';
-        $a->login = false;
-        $a->save(); */
-        
+        $newUser = new User();
+        $newUser->pseudo = $pseudonyme;
+        $newUser->password = $password;
+        $newUser->email = $email;
+        $newUser->login = true;
+        $newUser->save();
+
+        start_session($newUser);
+
         break;
 
     case 'kill':
