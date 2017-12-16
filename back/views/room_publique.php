@@ -31,7 +31,22 @@
         <div class="wrapper-chat">
             <ul id="message-chat">
             </ul>
+
+            <form>
+                <input type="text" id="m">
+                <input type="submit" value="Envoyer">
+            </form>
         </div>
 
     </section>
 </main>
+
+<?php $currentUser = 'vince' ?>
+
+<script>
+
+    var currentUser = "<?= $currentUser ?>";
+
+    socket.emit('getCurrentUser', currentUser);
+
+</script>
