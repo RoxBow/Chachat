@@ -29,4 +29,3 @@ if (is_file($view_path))
 	include('layouts/layout.php');
 else
 	error404('view missing : '.$view_path);
-	

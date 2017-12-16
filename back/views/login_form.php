@@ -1,4 +1,4 @@
-<form action="/action_page.php">
+<form action="?action=login">
   <h1>
     <?= $login_message ?>
   </h1>

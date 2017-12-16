@@ -25,7 +25,7 @@ Class Akham{
     }
 
     public function hydrate(){
-        
+        echo 'in<br>';
         if($this->{$this->pk} ==null){
             die('fatal error: cannot hydrate without PK value');
         }
@@ -33,19 +33,28 @@ Class Akham{
         $query = "SELECT * FROM ".$this->table_name." WHERE ".$this->pk." = '".$this->{$this->pk}."'";
         $entity = myFetchAssoc($query);
 
+        var_dump($entity);
+
         foreach($entity as $field => $value){
-            if($field != $this->pk){
+            if($field != $this->pk && $field != 'id'){
                 $this->$field = $value;
             }
         }
     }
 
     public function save(){
-        if ( $this->{$this->pk} != null ) {
+        $allPseudoQuery = "SELECT `pseudo` FROM ".$this->table_name;
+        $allPseudoAssoc = myFetchAllAssoc($allPseudoQuery);
+
+        foreach ($allPseudoAssoc as $value) {
+            $allPseudo[] = $value['pseudo'];
+        }
+
+        if ( in_array($this->{$this->pk}, $allPseudo) ) {
             $temp = '';
 
             foreach ($this->fields as $value) {
-                if ($value != $this->pk) {
+                if ($value != $this->pk && $value != 'id') {
                     if ($value === end($this->fields)) {
                         $temp.=$value.'="'.$this->$value.'"';
                     } else{
@@ -54,14 +63,32 @@ Class Akham{
                 }
                 
             }
-
-            $query_update = 'UPDATE '.$this->table_name.' SET '.$temp.' WHERE '.$this->pk.' = '.$this->{$this->pk};
-
+            
+            $query_update = 'UPDATE '.$this->table_name.' SET '.$temp.' WHERE '.$this->pk.' = \''.$this->{$this->pk}.'\'';
+            echo $query_update.'<br>';
             myQuery($query_update);
         
         // si on a une valeur pour la pk on UPDATE
         } else{
+            $temp_columns = '';
+            $temp_values = '';
+            
+            foreach ($this->fields as $value) {
 
+                if ($value === end($this->fields)) {
+                    $temp_columns.=$value.'';
+                    $temp_values.='\''.$this->$value.'\'';
+                } else{
+                    $temp_columns.=$value.',';                        
+                    $temp_values.='\''.$this->$value.'\', ';
+                }
+
+            }
+
+            $query_insert = 'INSERT INTO '.$this->table_name.' ('.$temp_columns.') VALUES ('.$temp_values.');';
+            
+            myQuery($query_insert);
+            
         }
         // si on a pas de valeur pour la pk on INSERT
     }

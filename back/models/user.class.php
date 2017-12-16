@@ -8,7 +8,7 @@ Class User extends Akham {
     public function __construct(){
         $this->pk = 'pseudo';
         $this->table_name = 'users';
-        $this->fields=['id', 'email', 'pseudo', 'password'];
+        $this->fields=['id','email', 'pseudo', 'password', 'login'];
     }
     
 }

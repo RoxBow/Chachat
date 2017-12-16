@@ -26,7 +26,15 @@ switch ($action) {
         break;
     
     case 'register':
-        # code...
+        //Register a new user in database
+
+        /* $a = new User();
+        $a->pseudo = 'yeat';
+        $a->password = 'yeatword2az2az25';
+        $a->email = 'yeat@yeat.com';
+        $a->login = false;
+        $a->save(); */
+        
         break;
 
     case 'kill':
@@ -40,9 +48,6 @@ switch ($action) {
 }
 
 function start_session($a_user){
-    // On définit un login et un mot de passe de base pour tester notre exemple. Cependant, vous pouvez très bien interroger votre base de données afin de savoir si le visiteur qui se connecte est bien membre de votre site
-    $login_valide = "roxboww";
-    $pwd_valide = "bendo";
 
     // on teste si nos variables sont définies
     if (isset($_POST['pseudo']) && isset($_POST['password'])) {
