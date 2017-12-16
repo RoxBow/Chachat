@@ -41,12 +41,18 @@
     </section>
 </main>
 
-<?php $currentUser = 'vince' ?>
+<?php
+    $currentUser = 'vince';
+    $currentRoom = 'general';
+?>
 
 <script>
 
-    var currentUser = "<?= $currentUser ?>";
+    var user = {
+        username: "<?= $currentUser ?>",
+        room: "<?= $currentRoom ?>"
+    };
 
-    socket.emit('getCurrentUser', currentUser);
+    socket.emit('getCurrentUser', user);
 
 </script>

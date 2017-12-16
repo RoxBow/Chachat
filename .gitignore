@@ -1,6 +1,4 @@
-node_modules/
-assets/css/*/*.css
-assets/css/*.css
+back/node_modules/
 .sass-cache/
 .vscode/
 .idea/

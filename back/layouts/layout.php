@@ -18,9 +18,9 @@
 
 <?php include($view_path); ?>
 
-    <script src='./dists/js/jquery-3.2.1.min.js'></script>
-    <script src='./dists/js/chat.js'></script>
-    <script src='./dists/js/main.js'></script>
-    <script src='./dists/js/home.js'></script>
+    <script src='./dists/js-compiled/jquery-3.2.1.min.js'></script>
+    <script src='./dists/js-compiled/chat.js'></script>
+    <script src='./dists/js-compiled/main.js'></script>
+    <script src='./dists/js-compiled/home.js'></script>
 </body>
 </html>
