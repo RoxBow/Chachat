@@ -1,725 +1,183 @@
-@import "fonts";
-@import "variables";
-
-@mixin beforeNameRoom ($numberIcone) {
-    content: $numberIcone;
-    font-family: fontAwesome;
-    font-size: 14px;
-    margin-right: 5px;
-    margin-left: 10px;
+html, body {
+    height: 100%;
+    font-size: 16px;
+    overflow: hidden;
 }
 
-html, body {
-    font-size: 16px;
-    line-height: 1.4;
+* {
+    box-sizing: border-box;
+}
+
+.main-chat {
+    display: flex;
     height: 100%;
 
-    margin: 0;
-    padding: 0;
-}
+    h2 {
+        font-weight: 600;
+    } // h2
 
-.site-content { padding-top: 8vh; }
+    section {
+        height: 100%;
 
-.site-pusher {
-    .header {
-        position: fixed;
-        left: 0;
-        right: 0;
-        height: 8vh;
-    
-        line-height: 8vh;
-        color: #ffffff;
-    
-        background-color: $couleur-background-header-chat;
-    
-        .wrapper-header {
-            float: right;
-            width: 80%;
+        &.wrapper-info-room {
+            width: 30%;
+            color: #ffffff;
+            display: flex;
 
-            .wrapper-header-input {
-                float: right;
-                width: 210px;
-                margin-right: 15px;
+            div {
+                width: 50%;
+                height: 100%;
+                padding: 5%;
+                background-color: $primary-color;
 
-                input {
-                    width: 100%;
+                &:last-child {
+                    background-color: $second-color;
                 }
 
-                .fa-search {
+                h2 {
+                    text-align: center;
+                    font-size: 24px;
+                }
+
+                ul {
+                    padding: 10%;
+                    li {
+                        padding: 5%;
+                    }
+                }
+            }
+        } // wrapper-info-room
+
+        &.wrapper-chat {
+            width: 55%;
+            position: relative;
+            background: #9f44ca; /* Old browsers */
+            background: -moz-linear-gradient(top,  #9f44ca 0%, #2989d8 50%, #4086e9 51%, #9f44ca 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top,  #9f44ca 0%,#2989d8 50%,#4086e9 51%,#9f44ca 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom,  #9f44ca 0%,#2989d8 50%,#4086e9 51%,#9f44ca 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9f44ca', endColorstr='#9f44ca',GradientType=0 ); /* IE6-9 */
+
+            h2 {
+                text-align: center;
+                color: #ffffff;
+                padding: 10px;
+                background-color: rgba(0, 0, 0, .2)
+            }
+
+            div {
+                ul {
+                    display: flex;
+                    flex-direction: column;
+                    padding: 40px;
+                    li {
+                        background-color: $couleur-background-message;
+                        width: 40%;
+                        border-radius: 20px;
+                        margin: 10px 0;
+                        padding: 8px 15px;
+                        position: relative;
+                        font-size: 14px;
+
+                        span {
+                            display: block;
+                            &::after {
+                                content: ' : ';
+                            }
+                        }
+
+                        &::after {
+                         content: '';
+                         position: absolute;
+                         bottom: -5px;
+                         left: 18px;
+                         width: 0; 
+                         height: 0;
+                         border-left: 5px solid transparent;
+                         border-right: 5px solid transparent;
+                         border-top: 5px solid $couleur-background-user-message;   
+                        }
+
+                        &.current-user {
+                            align-self: flex-end;
+                            background-color: $couleur-background-current-user-message;
+                            color: #ffffff;
+
+                            &::after {
+                                right: 18px;
+                                left: inherit;
+                                border-left: 5px solid transparent;
+                                border-right: 5px solid transparent;
+                                border-top: 5px solid $couleur-background-current-user-message; 
+                            }
+                        }
+                    }
+                }
+
+                .wrapper-input-chat {
+                    display: flex;
                     position: absolute;
-                    right: 15px;
-                    top: 50%;
-                    transform: translateY(-50%);
-                }
-            } // wrapper-header-input
-
-            .fa-cog {
-                position: absolute;
-                right: 240px;
-                top: 50%;
-                transform: translateY(-50%);
-            }
-        }
-    
-        .menu {
-            width: 20%;
-            height: 100vh;
-            float: left;
-            background-color: $couleur-background-menu-left;
-
-            .section-room-friends {
-                .wrapper-onglets {
-                    ul {
-                        margin: 0;
-                        line-height: 1.2;
-                        li {
-                            background-color: #9B0812;
-                            font-size: 16px;
-                            padding: 10px 0px;
-                            display: inline-block;
-                            width: 50%;
-                            text-align: center;
-                            cursor: pointer;
-
-                            &.onglet-rooms {
-                                margin-right: -4px;
-                            }
-                            
-                            &.selected {
-                                background-color: $couleur-background-onglet-actif;
-                                box-shadow: 0px 1px 1px 0px #000000;
-                            }
-                            a {
-                                color: $couleur-textes;
-                            }
-
-                            &::after {
-                                content: '\f111';
-                                font-family: fontAwesome;
-                                font-size: 12px;
-                                color: #33cc33;
-                                margin-left: 5px;
-                            }
-                        } // li
-                    } // ul
-                } // wrapper-onglets
-
-                .wrapper-friends {
-                    display: none;
-
-                    .wrapper-online-friends, .wrapper-offline-friends {
-                        padding: 0 20px;
-                    } // wrapper-online-friends
-
-                    .header-wrapper-friends {
-                        h2, & > i {
-                            display: inline-block;
-                            color: #000000;
-                            cursor: pointer;
-                        }
-
-                        h2 {
-                            font-size: 18px;
-                            margin: 0;
-                        }
-                    } // header-wrapper-rooms
-
-                    ul { 
-                        margin: 0 0 15px 0; 
-                        
-                        li {
-                            line-height: 1.2;
-                        }
-                    }
-
-                    a {
-                        color: #000000;
-                    }
-                } // wrapper-friends
-
-                .wrapper-section-rooms {
-                    .wrapper-rooms {
-                        padding: 0 20px;
-
-                        .header-wrapper-rooms {
-                            h2, & > i {
-                                display: inline-block;
-                                color: #000000;
-                                cursor: pointer;
-                            }
-
-                            h2 {
-                                font-size: 18px;
-                                margin: 0;
-                            }
-                        } // header-wrapper-rooms
-
-                        ul { 
-                            margin: 0 0 15px 0; 
-                            
-                            li {
-                                line-height: 1.2;
-                            }
-                        }
-
-                        .public-room {
-                            li {
-                                &:hover {
-                                    background-color: gray;
-                                }
-                                &::before {
-                                    @include beforeNameRoom('\f0ac');
-                                }
-                            } // li
-                        } // public-room
-
-                        .private-room {
-                            li {
-                                &:hover {
-                                    background-color: gray;
-                                }
-                                &::before {
-                                    @include beforeNameRoom('\f023');
-                                }
-                            } // li
-                        } // private-room
-
-                        .private-message-room {
-                            li {
-                                &:hover {
-                                    background-color: gray;
-                                }
-                                &::before {
-                                    @include beforeNameRoom('\f2b5');
-                                }
-
-                                a {
-                                    color: #000000;
-                                }
-                            } // li
-                        } // private-message-room
-
-                        a {
-                            color: #000000;
-                        }
-                    } // wrapper-rooms
-                } // wrapper-section-room
-            } // section-room-friends
-        
-            a {
-                padding: 0 10px;
-            }
-        } // menu
-    } // header
-
-    .site-content {
-        padding-top: 8vh;
-        .container {
-            overflow: hidden;
-            width: 80%;
-            height: 92vh;
-            float: right;
-
-            .wrapper-chat {
-                .wrapper-area-chat {
-                    background-color: $couleur-background-chat;
-                    width: 50%;
-                    display: inline-block;
-                    margin-right: -4px;
-                    height: 92vh;
-                    position: relative;
-
-                    ul {
-                        list-style: none;
-                        padding: 15px;
-                        margin: 0;
-
-                        li {
-                            margin: 10px 0;
-                            background-color: red;
-                            padding: 10px 15px;
-                            border-radius: 20px;
-                            border-bottom-left-radius: 5px;
-                            position: relative;
-                            width: 45%;
-
-                            &::after {
-                                content: "";
-                                position: absolute;
-                                width: 0; 
-                                height: 0; 
-                                border-left: 10px solid transparent;
-                                border-right: 10px solid transparent;
-                                border-top: 8px solid red;
-                                left: 10px;
-                                bottom: -8px;
-                            }
-
-                            &.user-connected {
-                                background-color: blue;
-                                border-radius: 20px;
-                                border-bottom-right-radius: 5px;
-                                align-self: flex-end;
-
-                                &::after {
-                                    content: "";
-                                    position: absolute;
-                                    width: 0; 
-                                    height: 0; 
-                                    border-left: 10px solid transparent;
-                                    border-right: 10px solid transparent;
-                                    border-top: 8px solid blue;
-                                    right: 10px;
-                                    left: inherit;
-                                    bottom: -8px;
-                                }   
-                            } // user-connected
-                        } // li
-                    } // ul
+                    width: 100%;
+                    bottom: 0;
 
                     form {
-                        position: absolute;
-                        bottom: 0;
-                        width: 100%;
-                    } // form
-                } // wrapper-area-chat
-            } // wrapper-chat
-
-            .wrapper-game {
-                width: 50%;
-                display: inline-block;
-                background-color: $couleur-background-game;
-            } // wrapper-game
-        } // container
-    } // site-content
-        
-} // site-pusher
-
-
-
-
-
-body {
-    margin: 0;
-    a, h2, p {
-        font-family: SourceSansPro;
-        font-weight: 400;
-    }
-    ul {
-        padding: 0;
-        margin: 0;
-        list-style: none;
-    }
-    a {
-        text-decoration: none;
-    }
-    i.fa {
-        color: $couleur-icones;
-    }
-
-    input[type=text], input[type=password], input[type=email] {
-        border: none;
-        border-bottom: 1.5px solid $couleur-bordures;
-        background-color: transparent;
-        color: $couleur-textes;
-        height: 30px;
-        padding-left: 10px;
-        width: 50%;
-        font-size: 18px;
-    }
-
-    ::placeholder { /* Most modern browsers support this now. */
-        color:    $couleur-textes;
-     }
-
-    input:-webkit-autofill,
-    input:-webkit-autofill:hover, 
-    input:-webkit-autofill:focus
-    input:-webkit-autofill {
-        border: none;
-        border-bottom: 1.5px solid $couleur-bordures;
-        -webkit-text-fill-color: $couleur-textes;
-        transition: background-color 5000s ease-in-out 0s;
-    }
-
-    input[type=submit] {
-        height: 40px;
-        width: 200px;
-        border-radius: 8px;
-        margin-right: 5px;
-        margin-left: 5px;
-        cursor: pointer;
-    }
-    
-    input:focus,
-    select:focus,
-    textarea:focus,
-    button:focus {
-        outline: none;
-        /* border-bottom: 1.5px solid #000000; */
-    }
-    main {
-        &.wrapper-page-login {
-            background-size: cover;
-            display: flex;
-            section {
-                margin: 0;
-                padding: 0;
-                height: 100vh;
-    
-                &.section-choix-login {
-                    flex-grow: 2;
-                    align-self: stretch;
-                    background-color: $couleur-background-section;
-
-                    .container {
-                        position: relative;
-                        height: 90vh;
-                        
-                        .logo {
-                            text-align: center;
-                            color: #ffffff;
-                            margin-bottom: 40px;
-                        }
-                        .wrapper-btn-login {
-                            position: absolute;
-                            width: 100%;
-                            top: 50%;
-                            left: 50%;
-                            transform: translateX(-50%) translateY(-50%);
-
-                            .wrapper-login, .wrapper-sign-in, .wrapper-sign-guest {
-                                font-size: 20px;
-                                margin: 12px auto;
-                                width: 40%;
-                                a {
-                                    color: $couleur-textes;
-                                    white-space: nowrap;
-                                    padding-bottom: 5px;
-                                    position: relative;
-                                    &.selected {
-                                        border-bottom: 2px solid $couleur-bordure-selected;
-                                        &:hover::after {
-                                            width: 0;
-                                        }
-                                    }
-                                    i {
-                                        margin-right: 5px;
-                                    }
-
-                                    &::after {
-                                        content: '';
-                                        display: block;
-                                        position: absolute;
-                                        width: 0;
-                                        height: 2px;
-                                        bottom: -2px;
-                                        background: #ffffff;
-                                        transition: width .3s;
-                                    }
-                                    
-                                    &:hover::after {
-                                        width: 100%;
-                                        //transition: width .3s;
-                                    }
-                                }
-                            }
-                        } // wrapper-btn-login
-                    } // container
-                } // section-choix-login
-            
-                &.section-champs-login {
-                    flex-grow: 4;
-                    background-color: $couleur-background-section-login;
-                    .container {
-                        position: relative;
-                        height: 90vh;
-                        h2 {
-                            text-align: center;
-                            color: $couleur-titre;
-                            font-size: 2.5em;
-                        }
-        
-                        .wrapper-form {
-                            position: absolute;
-                            width: 70%;
-                            top: 50%;
-                            left: 50%;
-                            transform: translateX(-50%) translateY(-50%);
-                            form {
-                                p {
-                                    text-align: center;
-                                    input {
-                                        margin: 15px auto;
-                                    }
-                                }
-                            }
-                        } // wrapper-form
-
-                        .wrapper-form-register {
-                            display: none;
-                        }
-                    } // container
-                } // section-champs-login
-            
-                .container {
-                    padding: 20px;
-                }
-            }
-        } // main.wrapper-page-login
-
-
-
-
-
-        /* &.wrapper-page-room {
-            background-color: rgb(245, 245, 245);
-            display: flex;
-            .section-room-friends {
-                width: 18%;
-                background-color: $couleur-background-section;
-                .wrapper-onglets {
-                    background-color: white;
-                    width: 100%;
-                    ul {
-                        display: flex;
-                        margin-top: 0;
-                        list-style: none;
-                        li {
-                            background-color: #9B0812;
-                            font-size: 18px;
-                            line-height: 1.7em;
-                            padding: 10px 0px;
-                            width: 50%;
-                            text-align: center;
-                            cursor: pointer;
-                            
-                            &.selected {
-                                background-color: $couleur-background-onglet-actif;
-                                box-shadow: 0px 1px 1px 0px #000000;
-                            }
-                            a {
-                                color: $couleur-textes;
-                            }
-
-                            &::after {
-                                content: '\f111';
-                                font-family: fontAwesome;
-                                font-size: 12px;
-                                color: #33cc33;
-                                margin-left: 5px;
-                            }
-                        } // li
-                    } // ul
-                } // wrapper-onglets
-
-                .wrapper-friends {
-                    display: none;
-
-                    .wrapper-online-friends, .wrapper-offline-friends {
-                        padding: 0 20px;
-                    } // wrapper-online-friends
-
-                    .header-wrapper-friends {
-                        h2, & > i {
-                            display: inline-block;
-                            color: #000000;
-                            cursor: pointer;
-                        }
-
-                        h2 {
-                            font-size: 18px;
-                        }
-                    } // header-wrapper-rooms
-
-                    a {
-                        color: #000000;
-                    }
-                } // wrapper-friends
-
-                .wrapper-section-rooms {
-                    .wrapper-rooms {
-                        padding: 0 20px;
-
-                        .header-wrapper-rooms {
-                            h2, & > i {
-                                display: inline-block;
-                                color: #000000;
-                                cursor: pointer;
-                            }
-
-                            h2 {
-                                font-size: 20px;
-                            }
-                        } // header-wrapper-rooms
-
-                        .public-room {
-                            li {
-                                &:hover {
-                                    background-color: gray;
-                                }
-                                &::before {
-                                    @include beforeNameRoom('\f0ac');
-                                }
-                            } // li
-                        } // public-room
-
-                        .private-room {
-                            li {
-                                &:hover {
-                                    background-color: gray;
-                                }
-                                &::before {
-                                    @include beforeNameRoom('\f023');
-                                }
-                            } // li
-                        } // private-room
-
-                        .private-message-room {
-                            li {
-                                &:hover {
-                                    background-color: gray;
-                                }
-                                &::before {
-                                    @include beforeNameRoom('\f2b5');
-                                }
-
-                                a {
-                                    color: #000000;
-                                }
-                            } // li
-                        } // private-message-room
-
-                        a {
-                            color: #000000;
-                        }
-                    } // wrapper-rooms
-                } // wrapper-section-room
-            } // section-room-friends
-
-            .section-chat {
-                width: 82%;
-                .header-chat {
-                    display: flex;
-                    justify-content: space-between;
-                    padding: 10px 20px;
-                    height: 30px;
-                    background: $couleur-background-header-chat;
-
-                    .wrapper-header-left {
-                        display: flex;
-                        align-items: center;
-                        color: $couleur-textes;
-
-                        p {
-                            margin-right: 20px;
-                        }
-                        .pseudo-user {
-                            font-size: 18px;
-                        }
-                    }
-                    
-                    .wrapper-header-right {
-                        position: relative;
-                        span {
-                            margin-right: 10px;
-                            cursor: pointer;
-                        }
+                        align-self: flex-end;
+                        width: 90%;
                         input {
-                            width: 80%;
-                        }
-                        i.fa-search {
-                            position: absolute;
-                            top: 50%;
-                            transform: translateY(-50%);
-                            right: 20px;
-                            cursor: text;
-                        }
-                    }
-                } // header-chat
-
-
-                .wrapper-chat {
-                    display: flex;
-                    justify-content: space-between;
-                    .wrapper-game {
-                        background: $couleur-background-game;
-                        width: 40%;
-                    }
-
-                    .wrapper-area-chat {
-                        background: $couleur-background-chat;
-                        width: 60%;
-                        padding: 10px;
-                        position: relative;
-                        ul {
-                            display: flex;
-                            flex-direction: column;
-                            list-style: none;
-                            padding-bottom: 50px;
-
-                            li {
-                                margin: 10px 0;
-                                background-color: red;
-                                padding: 10px 15px;
-                                border-radius: 20px;
-                                border-bottom-left-radius: 5px;
-                                position: relative;
-                                width: 45%;
-
-                                &::after {
-                                    content: "";
-                                    position: absolute;
-                                    width: 0; 
-                                    height: 0; 
-                                    border-left: 10px solid transparent;
-                                    border-right: 10px solid transparent;
-                                    border-top: 8px solid red;
-                                    left: 10px;
-                                    bottom: -8px;
-                                }
-
-                                &.user-connected {
-                                    background-color: blue;
-                                    border-radius: 20px;
-                                    border-bottom-right-radius: 5px;
-                                    align-self: flex-end;
-
-                                    &::after {
-                                        content: "";
-                                        position: absolute;
-                                        width: 0; 
-                                        height: 0; 
-                                        border-left: 10px solid transparent;
-                                        border-right: 10px solid transparent;
-                                        border-top: 8px solid blue;
-                                        right: 10px;
-                                        left: inherit;
-                                        bottom: -8px;
-                                    }   
-                                } // user-connected
-                            } // li
-                        } // ul
-
-                        & > form {
-                            background-color: darkgray;
-                            position: absolute;
+                            padding-left: 20px;
+                            background-color: $second-color;
+                            border: none;
+                            position: relative;
+                            height: 72px;
                             width: 100%;
-                            left: 0;
-                            bottom: 0;
+                            opacity: .8;
+                        }
+                    }
 
-                            input[type="text"] {
-                                width: 60%;
-                            }
+                    button {
+                        width: 10%;
+                        background-color: $second-color;
+                        border: none;
+                        color: #ffffff;
+                    }
+                } // wrapper-input-chat
 
-                            input[type="submit"] {
-                                width: 30%;
-                            }
-                        } // form
-                    } // wrapper-area-chat
-                } // wrapper-chat
                 
-            } // section-chat
-        } */ // main.wrapper-page-room
-    } // main
-} // body
+            }
+        } // wrapper-chat
+
+        &.wrapper-list-amis {
+            width: 15%;
+            color: #ffffff;
+            background-color: $primary-color;
+            padding: 2%;
+
+            h2 {
+                text-align: center;
+                font-size: 24px;
+            } // h2
+
+            ul {
+                padding: 10%;
+                li {
+                    padding: 5%;
+                } // li
+            } // ul
+
+            form {
+                position: absolute;
+                bottom: 15px;
+                input {
+                    background-color: $second-color;
+                    border: none;
+                    padding-left: 45px;
+                    border-radius: 20px;
+                    position: relative;
+                    height: 36px;
+                    width: 100%;
+                } // input
+            } // form
+
+        } // wrapper-list-amis
+         
+    }
+}

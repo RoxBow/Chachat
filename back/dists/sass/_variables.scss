@@ -1,13 +1,9 @@
-$couleur-bordures: #cccccc;
-$couleur-icones: #ffffff;
-$couleur-titre: #ffffff;
-$couleur-textes: #ffffff;
-$couleur-bordure-selected : #ffffff;
-$couleur-background-onglet-actif: #EF0C1A;
-$couleur-background-section: #EF0C1A;
-$couleur-background-section-login: #202C3A;
-$couleur-background-header-chat:#202C3A;
-$couleur-background-menu-left: #EF0C1A;
+$primary-color: #1c1f28;
+$second-color: #292c35;
 
-$couleur-background-chat: #414040;
-$couleur-background-game: #9B0812;
+$couleur-bordures: #ffffff;
+$couleur-textes: #000000;
+
+$couleur-background-message: #ffffff;
+$couleur-background-current-user-message: $second-color;
+$couleur-background-user-message: #ffffff;
