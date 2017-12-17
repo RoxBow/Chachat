@@ -41,12 +41,30 @@ function start_session($a_user){
 	}
 }
 
+function test_input($data) {
+	$data = trim($data);
+	$data = stripslashes($data);
+	$data = htmlspecialchars($data);
+	return $data;
+}
+
+function __autoload($class_name) 
+{
+    require_once ("models/".$class_name.".class.php");
+}
+
 function currentUser(){
 	$theCurrentUser = new User();
 	$theCurrentUser->pseudo = $_SESSION['pseudo'];
 	$theCurrentUser->hydrate();
 	
 	return $theCurrentUser;
+}
+
+function allEntities($tableName){
+	$query = "SELECT * FROM ".$tableName;
+	$entity = myFetchAllAssoc($query);
+	return $entity;
 }
 
 /* function logOut($session_pseudo){

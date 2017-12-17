@@ -1,6 +1,5 @@
 <?php
 
-require_once('models/user.class.php');
 
 switch ($action) {
     case 'login_form':
@@ -10,7 +9,7 @@ switch ($action) {
     
     case 'login':
         echo '<script>console.log("log in")</script>';
-        $pseudonyme = htmlspecialchars($_POST["pseudo"]);
+        $pseudonyme = test_input($_POST["pseudo"]);
 
         $user = new User();
 		$user->pseudo = $pseudonyme;
@@ -26,9 +25,9 @@ switch ($action) {
     case 'register':
         echo '<script>console.log("sign in")</script>';
     
-        $email = htmlspecialchars($_POST["email"]);
-        $pseudonyme = htmlspecialchars($_POST["pseudo"]);
-        $password = htmlspecialchars($_POST["password"]);
+        $email = test_input($_POST["email"]);
+        $pseudonyme = test_input($_POST["pseudo"]);
+        $password = test_input($_POST["password"]);
         //Register a new user in database
 
         $newUser = new User();

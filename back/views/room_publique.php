@@ -3,10 +3,11 @@
         <div>
             <h2>Salon</h2>
             <ul>
-                <li>Général</li>
-                <li>ECV Digital</li>
-                <li>Team Soudée</li>
-                <li>Bendo na Bendo</li>
+                <?php
+                    foreach (allEntities('rooms') as $key => $value) {
+                        echo '<li id="'.$value['nom'].'">'.$value['nom'].'</li>';
+                    }
+                ?>
             </ul>
         </div>
         <div>
@@ -55,8 +56,8 @@
 </main>
 
 <?php
-    $currentUser = 'vince';
-    $currentRoom = 'general';
+    $currentUser = $_SESSION['pseudo'];
+    $currentRoom = allEntities('rooms')[0]['nom'];
 ?>
 
 <script>
