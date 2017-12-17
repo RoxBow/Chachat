@@ -1,7 +1,10 @@
+@import "reset";
 @import "fonts";
 @import "variables";
-@import "style-desktop";
 
+@media (min-width: 768px) {
+    @import "style-desktop";
+}
 
 @media (max-width: 768px) { 
     @import "style-mobile";

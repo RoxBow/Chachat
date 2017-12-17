@@ -9,6 +9,296 @@
     margin-left: 10px;
 }
 
+html, body {
+    font-size: 16px;
+    line-height: 1.4;
+    height: 100%;
+
+    margin: 0;
+    padding: 0;
+}
+
+.site-content { padding-top: 8vh; }
+
+.site-pusher {
+    .header {
+        position: fixed;
+        left: 0;
+        right: 0;
+        height: 8vh;
+    
+        line-height: 8vh;
+        color: #ffffff;
+    
+        background-color: $couleur-background-header-chat;
+    
+        .wrapper-header {
+            float: right;
+            width: 80%;
+
+            .wrapper-header-input {
+                float: right;
+                width: 210px;
+                margin-right: 15px;
+
+                input {
+                    width: 100%;
+                }
+
+                .fa-search {
+                    position: absolute;
+                    right: 15px;
+                    top: 50%;
+                    transform: translateY(-50%);
+                }
+            } // wrapper-header-input
+
+            .fa-cog {
+                position: absolute;
+                right: 240px;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+    
+        .menu {
+            width: 20%;
+            height: 100vh;
+            float: left;
+            background-color: $couleur-background-menu-left;
+
+            .section-room-friends {
+                .wrapper-onglets {
+                    ul {
+                        margin: 0;
+                        line-height: 1.2;
+                        li {
+                            background-color: #9B0812;
+                            font-size: 16px;
+                            padding: 10px 0px;
+                            display: inline-block;
+                            width: 50%;
+                            text-align: center;
+                            cursor: pointer;
+
+                            &.onglet-rooms {
+                                margin-right: -4px;
+                            }
+                            
+                            &.selected {
+                                background-color: $couleur-background-onglet-actif;
+                                box-shadow: 0px 1px 1px 0px #000000;
+                            }
+                            a {
+                                color: $couleur-textes;
+                            }
+
+                            &::after {
+                                content: '\f111';
+                                font-family: fontAwesome;
+                                font-size: 12px;
+                                color: #33cc33;
+                                margin-left: 5px;
+                            }
+                        } // li
+                    } // ul
+                } // wrapper-onglets
+
+                .wrapper-friends {
+                    display: none;
+
+                    .wrapper-online-friends, .wrapper-offline-friends {
+                        padding: 0 20px;
+                    } // wrapper-online-friends
+
+                    .header-wrapper-friends {
+                        h2, & > i {
+                            display: inline-block;
+                            color: #000000;
+                            cursor: pointer;
+                        }
+
+                        h2 {
+                            font-size: 18px;
+                            margin: 0;
+                        }
+                    } // header-wrapper-rooms
+
+                    ul { 
+                        margin: 0 0 15px 0; 
+                        
+                        li {
+                            line-height: 1.2;
+                        }
+                    }
+
+                    a {
+                        color: #000000;
+                    }
+                } // wrapper-friends
+
+                .wrapper-section-rooms {
+                    .wrapper-rooms {
+                        padding: 0 20px;
+
+                        .header-wrapper-rooms {
+                            h2, & > i {
+                                display: inline-block;
+                                color: #000000;
+                                cursor: pointer;
+                            }
+
+                            h2 {
+                                font-size: 18px;
+                                margin: 0;
+                            }
+                        } // header-wrapper-rooms
+
+                        ul { 
+                            margin: 0 0 15px 0; 
+                            
+                            li {
+                                line-height: 1.2;
+                            }
+                        }
+
+                        .public-room {
+                            li {
+                                &:hover {
+                                    background-color: gray;
+                                }
+                                &::before {
+                                    @include beforeNameRoom('\f0ac');
+                                }
+                            } // li
+                        } // public-room
+
+                        .private-room {
+                            li {
+                                &:hover {
+                                    background-color: gray;
+                                }
+                                &::before {
+                                    @include beforeNameRoom('\f023');
+                                }
+                            } // li
+                        } // private-room
+
+                        .private-message-room {
+                            li {
+                                &:hover {
+                                    background-color: gray;
+                                }
+                                &::before {
+                                    @include beforeNameRoom('\f2b5');
+                                }
+
+                                a {
+                                    color: #000000;
+                                }
+                            } // li
+                        } // private-message-room
+
+                        a {
+                            color: #000000;
+                        }
+                    } // wrapper-rooms
+                } // wrapper-section-room
+            } // section-room-friends
+        
+            a {
+                padding: 0 10px;
+            }
+        } // menu
+    } // header
+
+    .site-content {
+        padding-top: 8vh;
+        .container {
+            overflow: hidden;
+            width: 80%;
+            height: 92vh;
+            float: right;
+
+            .wrapper-chat {
+                .wrapper-area-chat {
+                    background-color: $couleur-background-chat;
+                    width: 50%;
+                    display: inline-block;
+                    margin-right: -4px;
+                    height: 92vh;
+                    position: relative;
+
+                    ul {
+                        list-style: none;
+                        padding: 15px;
+                        margin: 0;
+
+                        li {
+                            margin: 10px 0;
+                            background-color: red;
+                            padding: 10px 15px;
+                            border-radius: 20px;
+                            border-bottom-left-radius: 5px;
+                            position: relative;
+                            width: 45%;
+
+                            &::after {
+                                content: "";
+                                position: absolute;
+                                width: 0; 
+                                height: 0; 
+                                border-left: 10px solid transparent;
+                                border-right: 10px solid transparent;
+                                border-top: 8px solid red;
+                                left: 10px;
+                                bottom: -8px;
+                            }
+
+                            &.user-connected {
+                                background-color: blue;
+                                border-radius: 20px;
+                                border-bottom-right-radius: 5px;
+                                align-self: flex-end;
+
+                                &::after {
+                                    content: "";
+                                    position: absolute;
+                                    width: 0; 
+                                    height: 0; 
+                                    border-left: 10px solid transparent;
+                                    border-right: 10px solid transparent;
+                                    border-top: 8px solid blue;
+                                    right: 10px;
+                                    left: inherit;
+                                    bottom: -8px;
+                                }   
+                            } // user-connected
+                        } // li
+                    } // ul
+
+                    form {
+                        position: absolute;
+                        bottom: 0;
+                        width: 100%;
+                    } // form
+                } // wrapper-area-chat
+            } // wrapper-chat
+
+            .wrapper-game {
+                width: 50%;
+                display: inline-block;
+                background-color: $couleur-background-game;
+            } // wrapper-game
+        } // container
+    } // site-content
+        
+} // site-pusher
+
+
+
+
+
 body {
     margin: 0;
     a, h2, p {
@@ -17,6 +307,7 @@ body {
     }
     ul {
         padding: 0;
+        margin: 0;
         list-style: none;
     }
     a {
@@ -36,6 +327,10 @@ body {
         width: 50%;
         font-size: 18px;
     }
+
+    ::placeholder { /* Most modern browsers support this now. */
+        color:    $couleur-textes;
+     }
 
     input:-webkit-autofill,
     input:-webkit-autofill:hover, 
@@ -173,12 +468,15 @@ body {
             }
         } // main.wrapper-page-login
 
-        &.wrapper-page-room {
+
+
+
+
+        /* &.wrapper-page-room {
             background-color: rgb(245, 245, 245);
             display: flex;
             .section-room-friends {
-                width: 20%;
-                height: 100vh;
+                width: 18%;
                 background-color: $couleur-background-section;
                 .wrapper-onglets {
                     background-color: white;
@@ -198,7 +496,7 @@ body {
                             
                             &.selected {
                                 background-color: $couleur-background-onglet-actif;
-                                box-shadow: 0px 1px 5px 0px #000000;
+                                box-shadow: 0px 1px 1px 0px #000000;
                             }
                             a {
                                 color: $couleur-textes;
@@ -230,9 +528,13 @@ body {
                         }
 
                         h2 {
-                            font-size: 22px;
+                            font-size: 18px;
                         }
                     } // header-wrapper-rooms
+
+                    a {
+                        color: #000000;
+                    }
                 } // wrapper-friends
 
                 .wrapper-section-rooms {
@@ -247,7 +549,7 @@ body {
                             }
 
                             h2 {
-                                font-size: 22px;
+                                font-size: 20px;
                             }
                         } // header-wrapper-rooms
 
@@ -287,12 +589,16 @@ body {
                                 }
                             } // li
                         } // private-message-room
+
+                        a {
+                            color: #000000;
+                        }
                     } // wrapper-rooms
                 } // wrapper-section-room
             } // section-room-friends
 
             .section-chat {
-                width: 80%;
+                width: 82%;
                 .header-chat {
                     display: flex;
                     justify-content: space-between;
@@ -336,14 +642,13 @@ body {
                 .wrapper-chat {
                     display: flex;
                     justify-content: space-between;
-                    height: 100vh;
                     .wrapper-game {
-                        background: #9B0812;
+                        background: $couleur-background-game;
                         width: 40%;
                     }
 
                     .wrapper-area-chat {
-                        background: #414040;
+                        background: $couleur-background-chat;
                         width: 60%;
                         padding: 10px;
                         position: relative;
@@ -415,6 +720,6 @@ body {
                 } // wrapper-chat
                 
             } // section-chat
-        } // main.wrapper-page-room
+        } */ // main.wrapper-page-room
     } // main
 } // body

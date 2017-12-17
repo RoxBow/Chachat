@@ -1,3 +1,8 @@
+$('.header__icon').on('click', function (e) {
+    e.preventDefault();
+    $('body').toggleClass('with--sidebar');
+});
+
 // Action lors du clique sur les onglets de la page de chat
 $('.onglet-rooms, .onglet-friends').on('click', function () {
     $('.selected', '.wrapper-onglets ul').removeClass('selected');
