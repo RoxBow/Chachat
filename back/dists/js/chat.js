@@ -1,9 +1,9 @@
 // Action lors du clique sur les onglets de la page de chat
 $('.onglet-rooms, .onglet-friends').on('click', function () {
-    $('.wrapper-onglets ul li.selected').removeClass('selected');
+    $('.selected','.wrapper-onglets ul').removeClass('selected');
     $(this).addClass('selected');
 
-    if ($(this).attr('class') == "onglet-rooms selected") {
+    if ( $(this).hasClass('selected') ) {
         $('.wrapper-section-rooms').show();
         $('.wrapper-friends').hide();
     }
@@ -15,29 +15,27 @@ $('.onglet-rooms, .onglet-friends').on('click', function () {
 
 // Action lors du clique sur les titre de rooms sur la page de chat
 $('.header-wrapper-rooms').on('click', function () {
-    if ($(this).attr('class') == "header-wrapper-rooms selected") {
-        $(this).removeClass('selected');
-        $(this).children().removeClass('fa-chevron-down').addClass('fa-chevron-up');
-        $(this).next('.rooms').hide();
-    } else {
-        $(this).addClass('selected');
-        $(this).children().removeClass('fa-chevron-up').addClass('fa-chevron-down');
-        $(this).next('.rooms').show();
-    }
+    toggleList($(this),'.rooms');
 });
 
 // Action lors du clique sur les titre des amis connectés sur la page de chat
 $('.header-wrapper-friends').on('click', function () {
-    if ($(this).attr('class') == "header-wrapper-friends selected") {
-        $(this).removeClass('selected');
-        $(this).children().removeClass('fa-chevron-down').addClass('fa-chevron-up');
-        $(this).next('.list-friends').hide();
-    } else {
-        $(this).addClass('selected');
-        $(this).children().removeClass('fa-chevron-up').addClass('fa-chevron-down');
-        $(this).next('.list-friends').show();
-    }
+    toggleList($(this),'.list-friends');
 });
+
+function toggleList($el, $list) {
+    if ( $el.hasClass('selected') ) {
+        $el.removeClass('selected');
+        $el.find('.fa').removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        $el.next($list).hide();
+    } else {
+        $el.addClass('selected');
+        $el.find('.fa').removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        $el.next($list).show();
+    }
+}
+
+/* # Chat message # */
 
 $('form').submit(function (e) {
     e.preventDefault();
@@ -47,11 +45,23 @@ $('form').submit(function (e) {
 });
 
 socket.on('sendMessage', function (msg) {
-    var username = msg.username;
+
+    let username = msg.username;
 
     if(msg.sender === 'server'){
-        $('#message-chat').append($('<li style="color:red">').text(msg.content));
-    } else if(msg.sender === 'user'){
-        $('#message-chat').append($('<li style="color:white">').text(username+' : '+msg.content));
+        $('#message-chat').append($('<li style="color:#fff">').text(msg.content));
+    } else if(msg.sender === 'user' && username === currentUser.username){
+        $('#message-chat').append($('<li class="user-connected">').text(msg.content));
+    } else {
+        $('#message-chat').append($('<li>').text(username+' : '+msg.content));
     }
+});
+
+// Receive all old message
+socket.on('updateMessage', function (oldMsg) {
+
+    oldMsg.forEach(function(msg) {
+        $('#message-chat').append($('<li>').text(msg.sender+' : '+msg.content));
+    });
+
 });

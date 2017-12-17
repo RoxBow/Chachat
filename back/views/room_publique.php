@@ -126,11 +126,11 @@
 
 <script>
 
-    var user = {
+    var currentUser = {
         username: "<?= $currentUser ?>",
         room: "<?= $currentRoom ?>"
     };
 
-    socket.emit('getCurrentUser', user);
+    socket.emit('getCurrentUser', currentUser);
 
 </script>
