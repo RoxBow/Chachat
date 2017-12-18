@@ -13,6 +13,17 @@
         <div>
             <h2>En ligne</h2>
             <ul id="listUsers">
+                <li>
+                    <span class="fa fa-plus-circle" aria-label="Ajouter dans ma liste d'amis"></span>
+                    <span class="icon-user fa fa-user-circle-o" aria-label="Avatar de l'utilisateur"></span>
+                    Benjamin
+                </li>
+
+                <li>
+                    <span class="fa fa-times" aria-label="Ajouter dans ma liste d'amis"></span>
+                    <span class="icon-user fa fa-user-circle-o" aria-label="Avatar de l'utilisateur"></span>
+                    Vincent
+                </li>
                 <?php
                     //display all people online
 

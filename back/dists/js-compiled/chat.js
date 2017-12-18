@@ -5,6 +5,11 @@ $('.header__icon').on('click', e => {
     $('body').toggleClass('with--sidebar');
 });
 
+$('.list-room li').on('click', function () {
+    $('.list-room li.selected').removeClass('selected');
+    $(this).addClass('selected');
+});
+
 // Action lors du clique sur les onglets de la page de chat
 $('.onglet-rooms, .onglet-friends').on('click', () => {
     $('.selected', '.wrapper-onglets ul').removeClass('selected');
