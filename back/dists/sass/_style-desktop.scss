@@ -256,10 +256,12 @@
                             content: '\f00c';
                             font-family: fontAwesome;
                             position: absolute;
-                            right: 10px;
+                            right: 12%;
                             top: 50%;
                             transform: translateY(-50%);
                             z-index: 2;
+                            cursor: pointer;
+                            color: white
                         }
                     }
 
@@ -314,10 +316,9 @@
                     top: 50%;
                     transform: translateY(-50%);
                     z-index: 2;
+                    cursor: text;
                 }
             } // form
-
         } // wrapper-list-amis
-         
-    }
-}
+    } // section
+} // main-chat

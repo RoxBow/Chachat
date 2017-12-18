@@ -13,7 +13,7 @@
     </section>
 </main>
 
-<div class="popin">
+<div class="popin" style="display: none;">
     <div class="overlay"></div>
     <div class="wrapper-popin">
         <span class="close-popin fa fa-times"></span>
