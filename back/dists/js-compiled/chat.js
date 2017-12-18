@@ -68,7 +68,7 @@ socket.on('sendMessage', msg => {
 
 // Receive all old message
 socket.on('updateMessage', oldMsg => {
-    console.log(oldMsg);
+
     oldMsg.forEach(function (msg) {
         if (msg.sender === currentUser.username) {
             $('#listMessage').append($('<li class="current-user">').text(msg.content));
@@ -83,12 +83,15 @@ socket.on('cleanRoom', nameRoom => {
     $('#nameRoom').text(nameRoom);
 });
 
-$('li', '#listUsers').on('click', function () {
-    let nameFriendAdded = $(this).attr('id');
+$('li span', '#listUsers').on('click', function () {
+    let nameFriendAdded = $(this).parent().attr('data-name');
+    socket.emit('addFriend', nameFriendAdded);
+});
 
-    $.ajax({
-        method: "POST",
-        url: "controllers/ChatController.php",
-        data: nameFriendAdded
-    });
+socket.on('addFriend', ask => {
+    if (ask.type === "pending") {
+        $('#listFriends').append('<li data-name="' + ask.username + '">' + ask.username + ' <span data-actio="delete">Supprimer</span></li>');
+    } else if (ask.type === "ask") {
+        $('#listFriends').append('<li data-name="' + ask.username + '">' + ask.username + ' <span data-action="accept">Accepter</span><span data-action="delete">Supprimer</span></li>');
+    }
 });

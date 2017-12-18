@@ -19,7 +19,7 @@ db.connect( (err) => {
     console.log("Database::connected");
 });
 
-let listRooms;
+let listRooms, listUsers;
 
 http.listen(3000, () => {
     console.log('listening on *:3000');
@@ -30,6 +30,7 @@ http.listen(3000, () => {
 
     // reset history on connect server
     listRooms = [];
+    listUsers = [];
 
 });
 
@@ -45,6 +46,9 @@ io.sockets.on('connection', (socket) => {
         socket.room = user.room;
         socket.join(user.room);
         socket.emit('cleanRoom', user.room);
+
+        let User = { id: socket.id ,username: user.username };
+        listUsers.push(User);
 
         // Send all old message to new connection user
         // if room got message
@@ -68,6 +72,20 @@ io.sockets.on('connection', (socket) => {
         socket.emit('cleanRoom', room);
     });
 
+    socket.on('addFriend', (userAdded) => {
+        let query = `INSERT INTO friends (firstUser, secondUser) VALUES (${socket.username}, ${userAdded})`;
+        let userAddedId = findUser(userAdded);
+
+        db.query(query, (err) => {
+            if (err) throw err;
+            console.log(socket.username +" add "+userAdded +" as friend");
+        });
+
+        socket.emit('addFriend', { type:'pending', username: userAdded });
+        io.sockets.socket(userAddedId).emit('addFriend', { type:'ask', username: socket.username } );
+    });
+
+
     socket.on('disconnect', () => {
         console.log(socket.username+" -> disconnect");
     });
@@ -77,7 +95,7 @@ io.sockets.on('connection', (socket) => {
 function registerMsg(socket, roomUser, msg) {
     let finded = false;
 
-    listRooms.forEach(function(room) {
+    listRooms.forEach( (room) => {
         // get current room of socket
         if(roomUser === room.name){
             finded = true;
@@ -96,7 +114,7 @@ function registerMsg(socket, roomUser, msg) {
 function getHistoryMsg(roomUser) {
     let allMsg = null;
 
-    listRooms.forEach(function(room) {
+    listRooms.forEach( (room) => {
         if(roomUser === room.name){
             allMsg = room.msg;
             return false;
@@ -106,3 +124,15 @@ function getHistoryMsg(roomUser) {
     return allMsg;
 }
 
+
+function findUser(username) {
+    let socketIdFind = null;
+
+    listUsers.forEach(function(user) {
+        if(user.username === username){
+            socketIdFind = user.id;
+        }
+    });
+
+    return socketIdFind;
+}

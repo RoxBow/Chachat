@@ -17,7 +17,11 @@
                     //display all people online
 
                     foreach (allOnline() as $value) {
-                        echo '<li data-name="'.$value['pseudo'].'">'.$value['pseudo'].'<span>&nbsp;Ajouter&nbsp;</span></li>';
+                        if($value['pseudo'] === $_SESSION['pseudo']){
+                            echo '<li data-name="'.$value['pseudo'].'">'.$value['pseudo'].'</li>';
+                        } else {
+                            echo '<li data-name="'.$value['pseudo'].'">'.$value['pseudo'].'<span data-action="add">&nbsp;Ajouter&nbsp;</span></li>';
+                        }
                     }
                 ?>
             </ul>
@@ -48,13 +52,12 @@
 
     <section class="wrapper-list-amis">
         <h2>Amis</h2>
-        <ul>
+        <ul  id="listFriends">
             <?php
                 // display our friends
 	
                 foreach (myFriends($_SESSION['currentUser']) as $value) {
-                    echo '<li data-name="'.$value['secondUser'].'">'.$value['secondUser'].'<span>&nbsp;Supprimer&nbsp;</span></li>';
-                    //echo 'Statut de la demande'.$value['state'].'<br>';
+                    echo '<li data-name="'.$value['secondUser'].'">'.$value['secondUser'].'<span data-action="delete">&nbsp;Supprimer&nbsp;</span></li>';
                 }
 
             ?>
@@ -74,7 +77,7 @@
 <script>
 
     var currentUser = {
-        username: <?= $currentUser ?>,
+        username: prompt('Pseudo:'),
         room: "<?= $initialRoom ?>"
     };
 
