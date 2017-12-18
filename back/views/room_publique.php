@@ -15,6 +15,9 @@
             </ul>
         </div>
         <div>
+            <div class="wrapper-icone-room">
+                <span class="fa fa-commenting-o fa-2x"></span>
+            </div>
             <h2>En ligne</h2>
             <ul id="listUsers">
                 <li>
@@ -66,6 +69,9 @@
     </section>
 
     <section class="wrapper-list-amis">
+        <div class="wrapper-icone-amis">
+            <span class="fa fa-smile-o fa-2x"></span>
+        </div>
         <h2>Amis</h2>
         <ul  id="listFriends">
             <?php
