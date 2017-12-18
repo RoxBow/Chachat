@@ -1,4 +1,8 @@
 <main class="main-home">
+    <div class="section-menu">
+        <button class="burger-menu"></button>
+    </div>
+    
     <section class="wrapper-link-home">
         <span class="fa fa-picture-o fa-5x"></span>
         <ul>

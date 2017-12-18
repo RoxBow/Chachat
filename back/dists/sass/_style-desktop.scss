@@ -1,6 +1,13 @@
 .main-home {
     display: flex;
     height: 100%;
+    .section-menu {
+        display: none;
+       .burger-menu {
+            display: none;
+        } // burger-menu
+    } // section-menu
+    
     .wrapper-link-home {
         position: relative;
         height: 100%;

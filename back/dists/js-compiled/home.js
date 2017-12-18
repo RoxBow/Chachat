@@ -16,6 +16,10 @@ $(function () {
     $('.close-popin').on('click', function () {
         $('.popin').hide();
     });
+
+    $('.burger-menu').on('click', function () {
+        $('.section-menu').toggleClass('selected');
+    });
 });
 
 function loadForm(nameFile) {
