@@ -1,7 +1,7 @@
 <?php
 
 switch ($action) {
-	case 'room':
+	case 'room_publique':
         $welcome_room_message = 'Tu es sur la page de room';
 
         break;

@@ -13,9 +13,13 @@
         <div>
             <h2>En ligne</h2>
             <ul id="listUsers">
-                <li id="soline">Soline Rasmus</li>
-                <li id="ingrid">Ingrid Arnaud</li>
-                <li id="vincent">Vincent Deplais</li>
+                <?php
+                    //display all people online
+
+                    foreach (allOnline() as $value) {
+                        echo '<li data-name="'.$value['pseudo'].'">'.$value['pseudo'].'<span>&nbsp;Ajouter&nbsp;</span></li>';
+                    }
+                ?>
             </ul>
         </div>
     </section>
@@ -45,8 +49,15 @@
     <section class="wrapper-list-amis">
         <h2>Amis</h2>
         <ul>
-            <li>Soline Rasmus</li>
-            <li>Ingrid Arnaud</li>
+            <?php
+                // display our friends
+	
+                foreach (myFriends($_SESSION['currentUser']) as $value) {
+                    echo '<li data-name="'.$value['secondUser'].'">'.$value['secondUser'].'<span>&nbsp;Supprimer&nbsp;</span></li>';
+                    //echo 'Statut de la demande'.$value['state'].'<br>';
+                }
+
+            ?>
         </ul>
 
         <form action="">

@@ -3,7 +3,9 @@ require_once('tools/tools.php');
 // ROUTING
 require_once('routes.php');
 
-if (empty($_GET['action'])){
+session_start ();
+
+if ( empty($_GET['action']) || !isset($_SESSION['pseudo']) ){
 	$action = 'home';
 } else{
 	$action = $_GET['action'];

@@ -6,7 +6,7 @@ $routes = [	'home' => 'HomeController',
 			'register_form' => 'AuthController',
 			'register' => 'AuthController',
 			'kill' => 'AuthController',
-			'room' => 'ChatController',
+			'room_publique' => 'ChatController',
 			'create_room' => 'ChatController',
 			'friends' => 'ChatController'
 		];

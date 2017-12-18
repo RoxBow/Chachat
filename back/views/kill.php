@@ -1,6 +1,6 @@
 <?php
 // On démarre la session
-session_start ();
+//session_start ();
 
 // On détruit les variables de notre  et on met à false l'attribut login dans la base de donnée
 

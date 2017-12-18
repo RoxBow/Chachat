@@ -1,4 +1,5 @@
 <?php
+require_once('dbtools.php');
 
 function error404($message = 'Page not Found')
 {
@@ -17,17 +18,16 @@ function start_session($a_user){
 			// dans ce cas, tout est ok, on peut démarrer notre session
 
 			// on la démarre :)
-			session_start ();
+			//session_start ();
 			//On dit que l'user est connecté dans la BDD
 			$a_user->login=true;
 			$a_user->save();
 			// on enregistre les paramètres de notre visiteur comme variables de session ($login et $pwd) (notez bien que l'on utilise pas le $ pour enregistrer ces variables)
 			$_SESSION['currentUser'] = $a_user;
 			$_SESSION['pseudo'] = $_POST['pseudo'];
-			$_SESSION['password'] = $_POST['password'];
 
 			// on redirige notre visiteur vers une page de notre section membre
-			header ('location: index.php?action=room');
+			header ('location: index.php?action=room_publique');
 		}
 		else {
 			// Le visiteur n'a pas été reconnu comme étant membre de notre site. On utilise alors un petit javascript lui signalant ce fait
@@ -66,6 +66,25 @@ function allEntities($tableName){
 	$entity = myFetchAllAssoc($query);
 	return $entity;
 }
+
+function myFriends($aUser){
+	$query = "SELECT secondUser,state FROM friends WHERE firstUser='".$aUser->pseudo."'";
+	$entity = myFetchAllAssoc($query);
+
+	return $entity;
+}
+
+function allOnline(){
+	$query = "SELECT * FROM users WHERE login = true";
+	$entity = myFetchAllAssoc($query);
+
+	return $entity;
+}
+	
+/* function friendRequestState(){
+	$query = "SELECT * FROM users WHERE login = true";
+	$entity = myFetchAllAssoc($query);
+} */
 
 /* function logOut($session_pseudo){
 	$query_update = 'UPDATE '.$this->table_name.' SET '.$temp.' WHERE '.$this->pk.' = \''.$this->{$this->pk}.'\'';
