@@ -12,10 +12,10 @@
         </div>
         <div>
             <h2>En ligne</h2>
-            <ul>
-                <li>Soline Rasmus</li>
-                <li>Ingrid Arnaud</li>
-                <li>Vincent Deplais</li>
+            <ul id="listUsers">
+                <li id="soline">Soline Rasmus</li>
+                <li id="ingrid">Ingrid Arnaud</li>
+                <li id="vincent">Vincent Deplais</li>
             </ul>
         </div>
     </section>

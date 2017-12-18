@@ -5,10 +5,10 @@ $('.header__icon').on('click', (e) => {
 
 // Action lors du clique sur les onglets de la page de chat
 $('.onglet-rooms, .onglet-friends').on('click', () => {
-    $('.selected','.wrapper-onglets ul').removeClass('selected');
+    $('.selected', '.wrapper-onglets ul').removeClass('selected');
     $(this).addClass('selected');
 
-    if ( $(this).hasClass('selected') ) {
+    if ($(this).hasClass('selected')) {
         $('.wrapper-section-rooms').show();
         $('.wrapper-friends').hide();
     }
@@ -20,16 +20,16 @@ $('.onglet-rooms, .onglet-friends').on('click', () => {
 
 // Action lors du clique sur les titre de rooms sur la page de chat
 $('.header-wrapper-rooms').on('click', () => {
-    toggleList($(this),'.rooms');
+    toggleList($(this), '.rooms');
 });
 
 // Action lors du clique sur les titre des amis connectés sur la page de chat
 $('.header-wrapper-friends').on('click', () => {
-    toggleList($(this),'.list-friends');
+    toggleList($(this), '.list-friends');
 });
 
 function toggleList($el, $list) {
-    if ( $el.hasClass('selected') ) {
+    if ($el.hasClass('selected')) {
         $el.removeClass('selected');
         $el.find('.fa').removeClass('fa-chevron-down').addClass('fa-chevron-up');
         $el.next($list).hide();
@@ -42,14 +42,14 @@ function toggleList($el, $list) {
 
 /* # Chat message # */
 
-$('form').submit( (e) => {
+$('form').submit((e) => {
     e.preventDefault();
     socket.emit('sendMessage', $('#message').val());
     $('#message').val('');
     return false;
 });
 
-$('li','.list-room').on('click', function () {
+$('li', '.list-room').on('click', function () {
     let roomSelected = $(this).attr('id');
     socket.emit('joinRoom', roomSelected);
 });
@@ -58,21 +58,21 @@ socket.on('sendMessage', (msg) => {
 
     let username = msg.username;
 
-   if(msg.sender === 'user' && username === currentUser.username){
+    if (msg.sender === 'user' && username === currentUser.username) {
         $('#listMessage').append($('<li class="current-user">').text(msg.content));
     } else {
-        $('#listMessage').append($('<li>').text(username+' : '+msg.content));
+        $('#listMessage').append($('<li>').text(username + ' : ' + msg.content));
     }
 });
 
 // Receive all old message
 socket.on('updateMessage', (oldMsg) => {
     console.log(oldMsg);
-    oldMsg.forEach(function(msg) {
-        if(msg.sender === currentUser.username){
+    oldMsg.forEach(function (msg) {
+        if (msg.sender === currentUser.username) {
             $('#listMessage').append($('<li class="current-user">').text(msg.content));
         } else {
-            $('#listMessage').append($('<li>').text(msg.sender+' : '+msg.content));
+            $('#listMessage').append($('<li>').text(msg.sender + ' : ' + msg.content));
         }
     });
 
@@ -81,4 +81,14 @@ socket.on('updateMessage', (oldMsg) => {
 socket.on('cleanRoom', (nameRoom) => {
     $('#listMessage').empty();
     $('#nameRoom').text(nameRoom);
+});
+
+$('li', '#listUsers').on('click', function () {
+    let nameFriendAdded = $(this).attr('id');
+
+    $.ajax({
+        method: "POST",
+        url: "controllers/ChatController.php",
+        data: nameFriendAdded
+    });
 });

@@ -82,3 +82,13 @@ socket.on('cleanRoom', nameRoom => {
     $('#listMessage').empty();
     $('#nameRoom').text(nameRoom);
 });
+
+$('li', '#listUsers').on('click', function () {
+    let nameFriendAdded = $(this).attr('id');
+
+    $.ajax({
+        method: "POST",
+        url: "controllers/ChatController.php",
+        data: nameFriendAdded
+    });
+});
