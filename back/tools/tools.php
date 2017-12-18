@@ -11,14 +11,11 @@ function start_session($a_user){
 	
 	// on teste si nos variables sont définies
 	if (isset($_POST['pseudo']) && isset($_POST['password'])) {
-		echo $_POST['pseudo'].'---'.$_POST['password'].'<br>';
 
 		// on vérifie les informations du formulaire, à savoir si le pseudo saisi est bien un pseudo autorisé, de même pour le mot de passe
 		if ($a_user->pseudo == $_POST['pseudo'] && $a_user->password == $_POST['password']) {
 			// dans ce cas, tout est ok, on peut démarrer notre session
 
-			// on la démarre :)
-			//session_start ();
 			//On dit que l'user est connecté dans la BDD
 			$a_user->login=true;
 			$a_user->save();
@@ -27,7 +24,8 @@ function start_session($a_user){
 			$_SESSION['pseudo'] = $_POST['pseudo'];
 
 			// on redirige notre visiteur vers une page de notre section membre
-			header ('location: index.php?action=room_publique');
+			header('Location: index.php?action=room_publique');
+			exit;
 		}
 		else {
 			// Le visiteur n'a pas été reconnu comme étant membre de notre site. On utilise alors un petit javascript lui signalant ce fait

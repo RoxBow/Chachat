@@ -63,7 +63,6 @@ Class Akham{
             }
             
             $query_update = 'UPDATE '.$this->table_name.' SET '.$temp.' WHERE '.$this->pk.' = \''.$this->{$this->pk}.'\'';
-            echo $query_update.'<br>';
             myQuery($query_update);
         
         // si on a une valeur pour la pk on UPDATE

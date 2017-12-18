@@ -24,13 +24,16 @@ let listRooms, listUsers;
 http.listen(3000, () => {
     console.log('listening on *:3000');
 
-    db.query("SELECT pseudo FROM users", function (err, result) {
-        if (err) throw err;
-    });
-
     // reset history on connect server
     listRooms = [];
     listUsers = [];
+
+    db.query("SELECT nom FROM rooms", function (err, result) {
+        if (err) throw err;
+        result.forEach(function(room) {
+            listRooms.push({ name: room.nom, msg: [] })
+        });
+    });
 
 });
 
@@ -40,6 +43,7 @@ app.use(express.static(path.join(__dirname, './dists')));
 io.sockets.on('connection', (socket) => {
 
     socket.on('getCurrentUser', (user) => {
+
         let historyMsg = getHistoryMsg(user.room);
 
         socket.username = user.username;
@@ -47,29 +51,33 @@ io.sockets.on('connection', (socket) => {
         socket.join(user.room);
         socket.emit('cleanRoom', user.room);
 
+        // Create a user
         let User = { id: socket.id ,username: user.username };
         listUsers.push(User);
+
+        updateListUser(listUsers, listRooms);
 
         // Send all old message to new connection user
         // if room got message
         if(historyMsg){
-            console.log(historyMsg);
             socket.emit('updateMessage', historyMsg);
         }
     });
 
     socket.on('sendMessage', (msg) => {
-        //io.emit('sendMessage', { sender:'user', content: msg, username: socket.username});
-        //Room.msg.push({ sender: socket.username, content: msg, date: new Date() });
-
         io.sockets.in(socket.room).emit('sendMessage', { sender:'user', content: msg, username: socket.username});
         registerMsg(socket, socket.room, msg);
     });
 
     socket.on('joinRoom', (room) => {
+        let historyMsg = getHistoryMsg(room);
         socket.room = room;
         socket.join(room);
         socket.emit('cleanRoom', room);
+
+        if(historyMsg){
+            socket.emit('updateMessage', historyMsg);
+        }
     });
 
     socket.on('addFriend', (userAdded) => {
@@ -85,7 +93,6 @@ io.sockets.on('connection', (socket) => {
         io.sockets.socket(userAddedId).emit('addFriend', { type:'ask', username: socket.username } );
     });
 
-
     socket.on('disconnect', () => {
         console.log(socket.username+" -> disconnect");
     });
@@ -99,7 +106,7 @@ function registerMsg(socket, roomUser, msg) {
         // get current room of socket
         if(roomUser === room.name){
             finded = true;
-            room.msg.push( { sender: socket.username, content: msg, date: new Date() } );
+            room.msg.push({ sender: socket.username, content: msg, date: new Date() });
         }
     });
 
@@ -135,4 +142,10 @@ function findUser(username) {
     });
 
     return socketIdFind;
+}
+
+function updateListUser(listUser, listRoom){
+    listRoom.forEach(function(room) {
+        io.sockets.in(room).emit('updateUser', listUser);
+    });
 }

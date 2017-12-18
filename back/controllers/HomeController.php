@@ -1,8 +1,6 @@
 
 <?php
 
-require_once('models/user.class.php');
-
 switch ($action) {
 	case 'home':
 	

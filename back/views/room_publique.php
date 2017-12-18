@@ -5,7 +5,11 @@
             <ul class="list-room">
                 <?php
                     foreach (allEntities('rooms') as $key => $value) {
-                        echo '<li id="'.$value['nom'].'">'.$value['nom'].'</li>';
+                        if($key === 0){
+                            echo '<li class="selected" id="'.$value['nom'].'">'.$value['nom'].'</li>';
+                        } else {
+                            echo '<li id="'.$value['nom'].'">'.$value['nom'].'</li>';
+                        }
                     }
                 ?>
             </ul>
@@ -89,7 +93,7 @@
 <script>
 
     var currentUser = {
-        username: $currentUser,
+        username: "<?= $currentUser ?>",
         room: "<?= $initialRoom ?>"
     };
 

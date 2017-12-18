@@ -70,7 +70,7 @@ socket.on('sendMessage', (msg) => {
     }
 });
 
-// Receive all old message
+// Receive all old messages
 socket.on('updateMessage', (oldMsg) => {
 
     oldMsg.forEach(function (msg) {
@@ -87,6 +87,7 @@ socket.on('cleanRoom', (nameRoom) => {
     $('#nameRoom').text(nameRoom);
 });
 
+// Add friend
 $('li span', '#listUsers').on('click', function () {
     let nameFriendAdded = $(this).parent().attr('data-name');
     socket.emit('addFriend', nameFriendAdded);
@@ -98,4 +99,12 @@ socket.on('addFriend', (ask) => {
     } else if (ask.type === "ask"){
         $('#listFriends').append('<li data-name="'+ask.username+'">'+ask.username+' <span data-action="accept">Accepter</span><span data-action="delete">Supprimer</span></li>');
     }
+});
+
+socket.on('updateUser', (listUser) => {
+    $('#listUsers').empty();
+
+    listUser.forEach(function(user) {
+        $('#listUsers').append('<li>'+user+'</li>');
+    });
 });

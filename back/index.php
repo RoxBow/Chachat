@@ -5,7 +5,6 @@ require_once('routes.php');
 
 session_start ();
 
-//|| empty($_SESSION['pseudo'])
 if ( empty($_GET['action']) ){
 	$action = 'home';
 } else{

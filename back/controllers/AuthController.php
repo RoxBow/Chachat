@@ -8,7 +8,6 @@ switch ($action) {
         break;
     
     case 'login':
-        echo '<script>console.log("log in")</script>';
         $pseudonyme = test_input($_POST["pseudo"]);
 
         $user = new User();
@@ -23,8 +22,7 @@ switch ($action) {
         break;
     
     case 'register':
-        echo '<script>console.log("sign in")</script>';
-    
+
         $email = test_input($_POST["email"]);
         $pseudonyme = test_input($_POST["pseudo"]);
         $password = test_input($_POST["password"]);
