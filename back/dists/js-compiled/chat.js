@@ -1,14 +1,16 @@
-$('.header__icon').on('click', function (e) {
+var _this = this;
+
+$('.header__icon').on('click', e => {
     e.preventDefault();
     $('body').toggleClass('with--sidebar');
 });
 
 // Action lors du clique sur les onglets de la page de chat
-$('.onglet-rooms, .onglet-friends').on('click', function () {
+$('.onglet-rooms, .onglet-friends').on('click', () => {
     $('.selected', '.wrapper-onglets ul').removeClass('selected');
-    $(this).addClass('selected');
+    $(_this).addClass('selected');
 
-    if ($(this).hasClass('selected')) {
+    if ($(_this).hasClass('selected')) {
         $('.wrapper-section-rooms').show();
         $('.wrapper-friends').hide();
     } else {
@@ -18,13 +20,13 @@ $('.onglet-rooms, .onglet-friends').on('click', function () {
 });
 
 // Action lors du clique sur les titre de rooms sur la page de chat
-$('.header-wrapper-rooms').on('click', function () {
-    toggleList($(this), '.rooms');
+$('.header-wrapper-rooms').on('click', () => {
+    toggleList($(_this), '.rooms');
 });
 
 // Action lors du clique sur les titre des amis connectés sur la page de chat
-$('.header-wrapper-friends').on('click', function () {
-    toggleList($(this), '.list-friends');
+$('.header-wrapper-friends').on('click', () => {
+    toggleList($(_this), '.list-friends');
 });
 
 function toggleList($el, $list) {
@@ -41,30 +43,42 @@ function toggleList($el, $list) {
 
 /* # Chat message # */
 
-$('form').submit(function (e) {
+$('form').submit(e => {
     e.preventDefault();
-    socket.emit('sendMessage', $('#m').val());
-    $('#m').val('');
+    socket.emit('sendMessage', $('#message').val());
+    $('#message').val('');
     return false;
 });
 
-socket.on('sendMessage', function (msg) {
+$('li', '.list-room').on('click', function () {
+    let roomSelected = $(this).attr('id');
+    socket.emit('joinRoom', roomSelected);
+});
+
+socket.on('sendMessage', msg => {
 
     let username = msg.username;
 
-    if (msg.sender === 'server') {
-        $('#message-chat').append($('<li style="color:#fff">').text(msg.content));
-    } else if (msg.sender === 'user' && username === currentUser.username) {
-        $('#message-chat').append($('<li class="user-connected">').text(msg.content));
+    if (msg.sender === 'user' && username === currentUser.username) {
+        $('#listMessage').append($('<li class="current-user">').text(msg.content));
     } else {
-        $('#message-chat').append($('<li>').text(username + ' : ' + msg.content));
+        $('#listMessage').append($('<li>').text(username + ' : ' + msg.content));
     }
 });
 
 // Receive all old message
-socket.on('updateMessage', function (oldMsg) {
-
+socket.on('updateMessage', oldMsg => {
+    console.log(oldMsg);
     oldMsg.forEach(function (msg) {
-        $('#message-chat').append($('<li>').text(msg.sender + ' : ' + msg.content));
+        if (msg.sender === currentUser.username) {
+            $('#listMessage').append($('<li class="current-user">').text(msg.content));
+        } else {
+            $('#listMessage').append($('<li>').text(msg.sender + ' : ' + msg.content));
+        }
     });
+});
+
+socket.on('cleanRoom', nameRoom => {
+    $('#listMessage').empty();
+    $('#nameRoom').text(nameRoom);
 });

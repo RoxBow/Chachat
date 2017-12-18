@@ -21,8 +21,7 @@ else
 	error404('controller missing : '.$controller_path);
 
 // VIEW
-/* $view_path = 'views/'.$action.'.php'; */
-$view_path = 'views/room_publique.php';
+$view_path = 'views/'.$action.'.php';
 $css_path = './dists/css/index.css';
 $fontawesome_path = './dists/font-awesome/css/font-awesome.min.css';
 

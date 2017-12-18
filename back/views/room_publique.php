@@ -2,7 +2,7 @@
     <section class="wrapper-info-room">
         <div>
             <h2>Salon</h2>
-            <ul>
+            <ul class="list-room">
                 <?php
                     foreach (allEntities('rooms') as $key => $value) {
                         echo '<li id="'.$value['nom'].'">'.$value['nom'].'</li>';
@@ -21,10 +21,10 @@
     </section>
 
     <section class="wrapper-chat">
-        <h2>Ingrid Arnaud</h2>
+        <h2 id="nameRoom">Ingrid Arnaud</h2>
 
         <div>
-            <ul>
+            <ul id="listMessage">
                 <li class="current-user"><span>Pseudo-user</span>Hello</li>
                 <li><span>Pseudo-user</span>Comment vas-tu ?</li>
                 <li class="current-user"><span>Pseudo-user</span>Très bien merci</li>
@@ -33,7 +33,7 @@
 
             <div class="wrapper-input-chat">
                 <form action="">
-                    <input type="text" name="" id="" placeholder="Votre message">
+                    <input type="text" name="" id="message" placeholder="Votre message">
                 </form>
 
                 <button class="fa fa-pencil"></button>
@@ -57,14 +57,14 @@
 
 <?php
     $currentUser = $_SESSION['pseudo'];
-    $currentRoom = allEntities('rooms')[0]['nom'];
+    $initialRoom = allEntities('rooms')[0]['nom'];
 ?>
 
 <script>
 
     var currentUser = {
-        username: "<?= $currentUser ?>",
-        room: "<?= $currentRoom ?>"
+        username: <?= $currentUser ?>,
+        room: "<?= $initialRoom ?>"
     };
 
     socket.emit('getCurrentUser', currentUser);
