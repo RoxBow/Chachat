@@ -1,33 +1,29 @@
-<main class="wrapper-page-login">
-    <section class="section-choix-login">
-        <div class="container">
-            <div class="logo">
-                <i class="fa fa-picture-o fa-5x" aria-hidden="true"></i>
-            </div>
-            <div class="wrapper-btn-login">
-                <div class="wrapper-login">
-                    <a href="#" class="link-login">
-                        <i class="fa fa-user fa-3x" aria-hidden="true"></i> Login
-                    </a>
-                </div>
-                <div class="wrapper-sign-in">
-                    <a href="#" class="link-register">
-                        <i class="fa fa-user fa-3x" aria-hidden="true"></i> S'enregistrer
-                    </a>
-                </div>
-                <div class="wrapper-sign-guest">
-                    <a href="#">
-                        <i class="fa fa-user fa-3x" aria-hidden="true"></i> Invité
-                    </a>
-                </div>
-            </div>
-        </div>
+<main class="main-home">
+    <section class="wrapper-link-home">
+        <span class="fa fa-picture-o fa-5x"></span>
+        <ul>
+            <li class="li-login selected"><span class="fa fa-user fa-2x"></span>Login</li>
+            <li class="li-register"><span class="fa fa-user fa-2x"></span>S'enregistrer</li>
+            <li><span class="fa fa-user fa-2x"></span>Invité</li>
+        </ul>
     </section>
-    <section class="section-champs-login">
-        <div class="container">
-            <h2>ChaChat</h2>
-            <div class="wrapper-form">
-            </div>
-        </div>
+    <section class="wrapper-form-home">
+        <h2>ChaChat</h2>
+        <div class="wrapper-form"></div>
     </section>
 </main>
+
+<div class="popin">
+    <div class="overlay"></div>
+    <div class="wrapper-popin">
+        <span class="close-popin fa fa-times"></span>
+        <div class="popin-header">
+            <span class="fa fa-times fa-2x"></span>
+            <h2 class="popin-title">ERREUR</h2>
+        </div>
+
+        <div class="popin-content">
+            <p class="popin-texte">Login incorrect</p>
+        </div>
+    </div>
+</div>

@@ -1,12 +1,98 @@
-html, body {
+.main-home {
+    display: flex;
     height: 100%;
-    font-size: 16px;
-    overflow: hidden;
-}
+    .wrapper-link-home {
+        position: relative;
+        height: 100%;
+        width: 30%;
+        background-color: $primary-color;
+        color: #ffffff;
 
-* {
-    box-sizing: border-box;
-}
+        & > span {
+            margin: 50px auto;
+            display: block;
+            text-align: center;
+        }
+
+        ul {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translateY(-50%) translateX(-50%);
+            width: 70%;
+
+            li {
+                font-size: 20px;
+                margin: 10px 0;
+                padding-bottom: 5px;
+                cursor: pointer;
+
+                span {
+                    margin-right: 30px;
+                }
+
+                &.selected {
+                    border-bottom: 2px solid #ffffff;
+                    &:hover::after {
+                        width: 0;
+                    }
+                }
+            } // li
+        } // ul
+    } // wrapper-link-home
+
+    .wrapper-form-home {
+        position: relative;
+        height: 100%;
+        width: 70%;
+        background: #9f44ca; /* Old browsers */
+        background: -moz-linear-gradient(top,  #9f44ca 0%, #2989d8 50%, #4086e9 51%, #9f44ca 100%); /* FF3.6-15 */
+        background: -webkit-linear-gradient(top,  #9f44ca 0%,#2989d8 50%,#4086e9 51%,#9f44ca 100%); /* Chrome10-25,Safari5.1-6 */
+        background: linear-gradient(to bottom,  #9f44ca 0%,#2989d8 50%,#4086e9 51%,#9f44ca 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9f44ca', endColorstr='#9f44ca',GradientType=0 ); /* IE6-9 */
+
+        h2 {
+            color: #ffffff;
+            text-align: center;
+            font-size: 24px;
+            margin: 50px;
+        }
+
+        .wrapper-form {
+            text-align: center;
+            position: absolute;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+
+            form {
+                p {
+                    input[type=text], input[type=password], input[type=email] {
+                        border: none;
+                        border-radius: 10px;
+                        background-color: rgba(0, 0, 0, .2);
+                        color: $couleur-textes;
+                        height: 47px;
+                        padding-left: 10px;
+                        margin: 15px;
+                        width: 40%;
+                        font-size: 18px;
+                    }
+
+                    input[type=submit] {
+                        border: none;
+                        height: 40px;
+                        width: 200px;
+                        border-radius: 8px;
+                        margin: 15px;
+                        cursor: pointer;
+                    }
+                }
+            }
+        } // wrapper-form
+    } // wrapper-form-home
+} // main-home
+
 
 .main-chat {
     display: flex;

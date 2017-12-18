@@ -1,17 +1,20 @@
-
 $(function () {
 
-    $('.link-login').on('click', function () {
+    $('.li-login').on('click', function () {
         loadForm("form_login.html");
     });
 
-    $('.link-register').on('click', function () {
+    $('.li-register').on('click', function () {
         loadForm("form_register.html");
     });
 
-    $('.wrapper-btn-login a').on('click', function () {
-        $('.wrapper-btn-login a.selected').removeClass('selected');
+    $('.wrapper-link-home ul li').on('click', function () {
+        $('.wrapper-link-home ul li.selected').removeClass('selected');
         $(this).addClass('selected');
+    });
+
+    $('.close-popin').on('click', function () {
+        $('.popin').hide();
     });
 });
 
@@ -28,6 +31,6 @@ function loadForm(nameFile) {
 
     // Si on est en version mobile, scroll jusqu'au formulaire lors du clique
     if (window.matchMedia('(max-width: 767px)').matches) {
-        $('html,body').animate({ scrollTop: $(".section-champs-login").offset().top }, 'slow');
+        $('html,body').animate({ scrollTop: $(".wrapper-form-home").offset().top }, 'slow');
     }
 }

@@ -1,0 +1,44 @@
+html, body {
+    height: 100%;
+    font-size: 16px;
+    overflow: hidden;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+h1, h2, h3 {
+    font-family: Avenir;
+    font-weight: 700;
+}
+
+p, a, li, ul, span, input {
+    font-family: Avenir;
+    font-weight: 400;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+    color: rgba(255, 255, 255, .2);
+ }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus
+input:-webkit-autofill {
+    border: none;
+    -webkit-text-fill-color: #ffffff;
+    transition: background-color 5000s ease-in-out 0s;
+}
