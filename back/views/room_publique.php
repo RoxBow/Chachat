@@ -73,7 +73,8 @@
 
             ?>
         </ul>
-
+        <a href="./index.php?action=kill">Déconnection</a>
+        
         <form action="">
             <input type="text" placeholder="Rechercher">
         </form>
