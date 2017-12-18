@@ -1,5 +1,6 @@
 .main-home {
     display: flex;
+    flex-direction: row;
     height: 100%;
     .section-menu {
         display: none;
@@ -19,6 +20,10 @@
             margin: 50px auto;
             display: block;
             text-align: center;
+            position: relative;
+            top: 0;
+            left: 0;
+            transform: none; 
         }
 
         ul {
@@ -116,6 +121,12 @@
             width: 30%;
             color: #ffffff;
             display: flex;
+            position: relative;
+            left: 0;
+
+            .wrapper-icone-room {
+                display: none;
+            }
 
             div {
                 width: 50%;
@@ -289,6 +300,12 @@
             color: #ffffff;
             background-color: $primary-color;
             padding: 0 1%;
+            position: relative;
+            right: 0;
+
+            .wrapper-icone-amis {
+                display: none;
+            }
 
             h2 {
                 text-align: center;

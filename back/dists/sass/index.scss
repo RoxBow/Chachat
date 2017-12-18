@@ -4,10 +4,8 @@
 @import "popin";
 @import "variables";
 
+@import "style-mobile";
+
 @media (min-width: 768px) {
     @import "style-desktop";
-}
-
-@media (max-width: 768px) {
-    @import "style-mobile";
 }
