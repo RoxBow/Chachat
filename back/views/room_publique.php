@@ -88,7 +88,7 @@
 <script>
 
     var currentUser = {
-        username: prompt('Pseudo:'),
+        username: $currentUser,
         room: "<?= $initialRoom ?>"
     };
 
