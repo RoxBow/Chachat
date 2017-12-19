@@ -11,7 +11,7 @@ switch ($action) {
         break;
 
     default:
-        error404('No '.$action.' in this controller: ChatController');
+        Akham::error404('No '.$action.' in this controller: ChatController');
         # code...
         break;
 }

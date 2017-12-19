@@ -109,8 +109,9 @@ Class Akham{
         // si on a pas de valeur pour la pk on INSERT
     }
 
-    public function thisUser(){
-        
+    public static function error404($message = 'Page not Found'){
+        header("HTTP/1.0 404 Not Found");
+        die($message);
     }
 }
 

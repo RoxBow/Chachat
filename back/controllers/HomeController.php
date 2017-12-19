@@ -13,7 +13,7 @@ switch ($action) {
         break;
 
     default:
-        error404('No '.$action.' in this controller: HomeController');
+        Akham::error404('No '.$action.' in this controller: HomeController');
         # code...
         break;
 }

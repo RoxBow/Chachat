@@ -1,13 +1,7 @@
 <?php
 require_once('dbtools.php');
 
-function error404($message = 'Page not Found')
-{
-	header("HTTP/1.0 404 Not Found");
-	die($message);
-}
-
-function start_session($a_user){
+/* function start_session($a_user){
 	
 	// on teste si nos variables sont définies
 	if (isset($_POST['pseudo']) && isset($_POST['password'])) {
@@ -37,7 +31,7 @@ function start_session($a_user){
 	else {
 		echo 'Les variables du formulaire ne sont pas déclarées.';
 	}
-}
+} */
 
 function test_input($data) {
 	$data = trim($data);

@@ -16,7 +16,7 @@ switch ($action) {
         }
 
         if( in_array($pseudonyme, $pseudo_tab) && password_verify($password , $user->password) ){
-            start_session($user);
+            $user->start_session();
         } else{
             $_SESSION['error'] = true;
             $_SESSION['contentError'] = 'Mauvais identifiant ou votre mot de passe ne correspond pas';
@@ -45,7 +45,7 @@ switch ($action) {
                 $newUser->login = false;
                 $newUser->save();
 
-                start_session($newUser);
+                $newUser->start_session();
             } else{
                 $_SESSION['error'] = true;
                 $_SESSION['contentError'] = 'Pseudo déjà utilisé';
@@ -68,10 +68,11 @@ switch ($action) {
     case 'kill':
 
         // On détruit les variables de notre  et on met à false l'attribut login dans la base de donnée
-
-        $currentUser = $_SESSION['currentUser'];
-        $currentUser->login = false;
-        $currentUser->save();
+        if( isset( $_SESSION['currentUser'] ) ){
+            $currentUser = $_SESSION['currentUser'];
+            $currentUser->login = false;
+            $currentUser->save();
+        }
 
         session_unset();
 
@@ -84,7 +85,7 @@ switch ($action) {
         break;
     
     default:
-        error404('No '.$action.' in this controller: authcontroller');
+        Akham::error404('No '.$action.' in this controller: authcontroller');
         # code...
         break;
 }
