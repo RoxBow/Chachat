@@ -11,7 +11,7 @@ let db = mysql.createConnection({
     user: "root",
     password: "root",
     database : "chat",
-    port: "3306" // port mysql
+    port: "8889" // port mysql
 });
 
 db.connect( (err) => {
@@ -28,6 +28,12 @@ http.listen(3000, () => {
     listRooms = [];
     listUsers = [];
 
+    let query = `UPDATE users SET login = '0'`;
+    db.query(query, function (err) {
+        if (err) throw err;
+    });
+
+
     db.query("SELECT nom FROM rooms", function (err, result) {
         if (err) throw err;
         result.forEach(function(room) {
@@ -38,7 +44,7 @@ http.listen(3000, () => {
 });
 
 // Load assets
-app.use(express.static(path.join(__dirname, './dists')));
+app.use( express.static(path.join(__dirname, './dists')) );
 
 io.sockets.on('connection', (socket) => {
 
@@ -48,11 +54,12 @@ io.sockets.on('connection', (socket) => {
 
         socket.username = user.username;
         socket.room = user.room;
+        socket.type = user.type;
         socket.join(user.room);
         socket.emit('cleanRoom', user.room);
 
         // Create a user
-        findOrCreateUser(socket.id, user.username);
+        findOrCreateUser(socket.id, user.username, socket.type);
 
         // Send new list user to client
         io.emit('updateUser', listUsers);
@@ -64,12 +71,31 @@ io.sockets.on('connection', (socket) => {
         }
     });
 
-    socket.on('sendMessage', (msg) => {
-        io.sockets.in(socket.room).emit('sendMessage', { sender:'user', content: msg, username: socket.username});
-        registerMsg(socket, socket.room, msg);
+    socket.on('sendMessage', (msg, receiver) => {
+
+        if(receiver){
+            let lengthConv = 0;
+            let idReceiver = findUser(receiver);
+
+            listUsers.forEach(function(user) {
+                if(user.username === socket.username && user.username === receiver){
+                    user.conversation.push({ sender: socket.username, content: msg, date: new Date() });
+                    lengthConv = user.conversation.length;
+                }
+            });
+
+            socket.emit('sendMessage', { sender:'user', content: msg, username: socket.username});
+            socket.broadcast.to(idReceiver).emit('sendNotif', { username: socket.username, number: lengthConv });
+
+        } else {
+            io.sockets.in(socket.room).emit('sendMessage', { sender:'user', content: msg, username: socket.username});
+            registerMsg(socket, socket.room, msg);
+        }
+
     });
 
     socket.on('joinRoom', (room) => {
+
         let historyMsg = getHistoryMsg(room);
         socket.room = room;
         socket.join(room);
@@ -114,6 +140,7 @@ io.sockets.on('connection', (socket) => {
 
         db.query(query, (err) => {
             if (err) throw err;
+
             socket.emit('updateAskFriend', { type:'delete', username: friend });
             socket.broadcast.to(idFriend).emit('updateAskFriend', { type:'delete', username: socket.username } );
         });
@@ -121,22 +148,32 @@ io.sockets.on('connection', (socket) => {
 
     /* ### CONVERSATION ### */
 
-    // Answer refuse friend
-    socket.on('begin-conv', (friend) => {
-        let idFriend = findUser(friend);
+    socket.on('open-conv', () => {
+
+        let conversation = null;
 
         listUsers.forEach(function(user) {
             if(user.username === socket.username){
-
-                user.push({ conversation: [] });
+                if(user.conversation){
+                    conversation = user.conversation;
+                }
             }
         });
 
-
+        socket.emit('updateMessage', conversation);
+        console.log("conversation: ",conversation);
     });
 
     socket.on('disconnect', () => {
         console.log(socket.username+" -> disconnect");
+        let query = `UPDATE users SET login = '0' WHERE pseudo = '${socket.username}' `;
+
+        // Send new list user
+        io.emit('updateUser', listUsers);
+
+        db.query(query, function (err) {
+            if (err) throw err;
+        });
     });
 
 });
@@ -187,7 +224,7 @@ function findUser(username) {
     return socketIdFind;
 }
 
-function findOrCreateUser(socketId, username) {
+function findOrCreateUser(socketId, username, socketType) {
     let userFinded = null;
 
     listUsers.forEach(function(user) {
@@ -198,7 +235,7 @@ function findOrCreateUser(socketId, username) {
 
     // If user doesn't exist then create it
     if(!userFinded){
-        let User = { id: socketId, username: username };
+        let User = { id: socketId, username: username, conversation: [], type: socketType };
         listUsers.push(User);
     }
 }

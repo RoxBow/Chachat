@@ -53,12 +53,36 @@ function toggleList($el, $list) {
     }
 }
 
+// Declare global variable selector
+
+let $listConv = $('#listConv');
+let $listFriend = $('#listFriends');
+let $listMessage = $('#listMessage');
+let $inputMessage = $('#message');
+
 /* # Chat message # */
 
 $('form').submit(e => {
     e.preventDefault();
-    socket.emit('sendMessage', $('#message').val());
-    $('#message').val('');
+
+    if ($inputMessage.hasClass('erreur-input')) {
+        $('.tooltip').hide();
+        $inputMessage.removeClass('erreur-input');
+    }
+
+    // error when empty input
+    if ($inputMessage.val() === "") {
+        $inputMessage.addClass('erreur-input');
+        $('.tooltip').show();
+    } else {
+        if ($(_this).find('input[type="text"]').attr('data-name')) {
+            socket.emit('sendMessage', $inputMessage.val(), $(_this).find('input[type="text"]').attr('data-name'));
+        } else {
+            socket.emit('sendMessage', $inputMessage.val());
+        }
+    }
+
+    $inputMessage.val('');
     return false;
 });
 
@@ -67,9 +91,9 @@ socket.on('sendMessage', msg => {
     let username = msg.username;
 
     if (msg.sender === 'user' && username === currentUser.username) {
-        $('#listMessage').append($('<li class="current-user">').text(msg.content));
+        $listMessage.append($('<li class="current-user">').text(msg.content));
     } else {
-        $('#listMessage').append($('<li>').text(username + ' : ' + msg.content));
+        $listMessage.append($('<li><span aria-label="pseudo de l\'utilisateur">' + username + '</span> : ' + msg.content + '</li>'));
     }
 });
 
@@ -78,15 +102,15 @@ socket.on('updateMessage', oldMsg => {
 
     oldMsg.forEach(function (msg) {
         if (msg.sender === currentUser.username) {
-            $('#listMessage').append($('<li class="current-user">').text(msg.content));
+            $listMessage.append($('<li class="current-user">').text(msg.content));
         } else {
-            $('#listMessage').append($('<li>').text(msg.sender + ' : ' + msg.content));
+            $listMessage.append($('<li>').text(msg.sender + ' : ' + msg.content));
         }
     });
 });
 
 socket.on('cleanRoom', nameRoom => {
-    $('#listMessage').empty();
+    $listMessage.empty();
     $('#nameRoom').text(nameRoom);
 });
 
@@ -96,19 +120,20 @@ socket.on('cleanRoom', nameRoom => {
 $("#listUsers").on("click", "li span", function () {
     let nameFriendAdded = $(this).parent().attr('data-name');
     socket.emit('askFriend', nameFriendAdded);
+    console.log(nameFriendAdded);
 });
 
 // Update list friend
 socket.on('askFriend', ask => {
 
     if (ask.type === "pending") {
-        $('#listFriends').append('<li class="pending" data-name="' + ask.username + '">' + ask.username + ' <span data-action="delete">Supprimer</span></li>');
+        $listFriend.append('<li class="pending" data-name="' + ask.username + '">' + ask.username + '<span class="fa fa-times" aria-label="Supprimer l\'amis"></span></li>');
     } else if (ask.type === "answer") {
-        $('#listFriends').append('<li class="pending" data-name="' + ask.username + '">' + ask.username + ' <span data-action="accept">Accepter</span><span data-action="delete">Supprimer</span></li>');
+        $listFriend.append('<li class="pending" data-name="' + ask.username + '">' + ask.username + '<span class="fa fa-check" aria-label="Accepter l\'amis"></span><span class="fa fa-times" aria-label="Supprimer l\'amis"></span></li>');
     }
 });
 
-$("#listFriends").on("click", "li span", function () {
+$listFriend.on("click", "li span", function () {
     let nameUserAsk = $(this).parent().attr('data-name');
 
     if ($(this).attr('data-action') === "accept") {
@@ -122,10 +147,11 @@ $("#listFriends").on("click", "li span", function () {
 socket.on('updateAskFriend', response => {
 
     if (response.type === "accept") {
-        $('#listFriends').find(`[data-name='${response.username}']`).removeClass('pending').addClass('friend-in');
-        $('#listFriends').find(`[data-name='${response.username}']`).find("[data-action='accept']").remove();
+        $listFriend.find(`[data-name='${response.username}']`).removeClass('pending').addClass('friend-in');
+        $listFriend.find(`[data-name='${response.username}']`).find("[data-action='accept']").remove();
+        $listFriend.find(`[data-name='${response.username}']`).append('<span class="begin-conv">Conv</span>');
     } else if (response.type === "delete") {
-        $('#listFriends').find(`[data-name='${response.username}']`).remove();
+        $listFriend.find(`[data-name='${response.username}']`).remove();
     }
 });
 
@@ -143,8 +169,11 @@ socket.on('updateUser', listUser => {
     $('#listUsers').empty(); // clean list
 
     listUser.forEach(function (user) {
+        console.log(user);
         if (user.username === currentUser.username) {
             $('#listUsers').append('<li class="current-user" data-name="' + user.username + '">' + '<span class="icon-user fa fa-user-circle-o" aria-label="Avatar de l\'utilisateur"></span>' + user.username + '</li>');
+        } else if (user.type === "guest") {
+            $('#listUsers').append('<li class="current-user" data-name="' + user.username + '">' + user.username + '</li>');
         } else {
             $('#listUsers').append('<li class="current-user" data-name="' + user.username + '">' + '<span title="Ajouter" class="fa fa-plus-circle" data-action="add" aria-label="Ajouter dans ma liste d\'amis"></span>' + '<span class="icon-user fa fa-user-circle-o" aria-label="Avatar de l\'utilisateur"></span>' + user.username + '</li>');
         }
@@ -153,15 +182,25 @@ socket.on('updateUser', listUser => {
 
 /* ### CHAT CONVERSATION ### */
 
-$("#listUsers").on("click", "li .begin-conv", function () {
-    let nameFriend = $(this).parent().attr('data-name');
+$listFriend.on("click", "li .begin-conv", e => {
+
+    let nameFriend = $(e.target).parent().attr('data-name');
+
+    $listMessage.empty();
+    $('#nameRoom').text(nameFriend);
 
     // Create tab only if it not exist
-    if (!$('#listConv').find(`[data-name='${nameFriend}']`)) {
-        $('#listConv').append('<li>' + nameFriend + '</li>');
-    } else if ($('#listConv').find(`[data-name='${nameFriend}']`)) {
-        $('#listConv').find(`[data-name='${nameFriend}']`).addClass('selected');
+    if (!$listConv.find(`[data-name='${nameFriend}']`)) {
+        $listConv.append('<li>' + nameFriend + '</li>');
+    } else if ($listConv.find(`[data-name='${nameFriend}']`)) {
+        $listConv.find(`[data-name='${nameFriend}']`).addClass('selected');
+        $listConv.find(`[data-name='${nameFriend}']`).find('.badge').remove();
+        socket.emit('open-conv', nameFriend);
     }
 
-    socket.emit('begin-conv', nameFriend);
+    $('form').find('input[type="text"]').attr('data-name', nameFriend);
+});
+
+socket.on('sendNotif', notif => {
+    $listConv.append('<li>' + notif.username + '<span class="badge">' + notif.number + '</span></li>');
 });

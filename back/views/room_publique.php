@@ -40,17 +40,13 @@
             <ul id="listConv">
                 <li>Elmarino <span class="badge" aria-label="bulle de notification">1</span> <span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
                 <li>Vince<span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
-                <li>Dylan<span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
             </ul>
         </div>
         <h2 id="nameRoom">Ingrid Arnaud</h2>
 
         <div>
             <ul id="listMessage">
-                <li class="current-user"><span aria-label="pseudo de l'utilisateur">Pseudo-user</span>Hello</li>
-                <li><span aria-label="pseudo de l'utilisateur">Pseudo-user</span>Comment vas-tu ?</li>
-                <li class="current-user"><span aria-label="pseudo de l'utilisateur">Pseudo-user</span>Très bien merci</li>
-                <li><span aria-label="pseudo de l'utilisateur">Pseudo-user</span>Ok</li>
+                <!-- Injected by Js -->
             </ul>
 
             <div class="wrapper-input-chat">
@@ -76,11 +72,7 @@
         </div>
         <h2>Amis</h2>
         <ul id="listFriends">
-            <li><span class="fa fa-times" aria-label="Supprimer l'amis"></span><span class="fa fa-check" aria-label="Accepter l'amis"></span>Elmarino</li>
-            <li><span class="fa fa-times" aria-label="Supprimer l'amis"></span>Vince</li>
-            <li><span class="fa fa-times" aria-label="Supprimer l'amis"></span>Vince</li>
-            <li><span class="fa fa-times" aria-label="Supprimer l'amis"></span><span class="fa fa-check" aria-label="Accepter l'amis"></span>Dylan</li>
-            <li><span class="fa fa-times" aria-label="Supprimer l'amis"></span>Malika Menard</li>
+            <!-- Injected in JS -->
             <?php
                 // display our friends
 	
@@ -94,7 +86,6 @@
                                     <span title="Supprimer" class="fa fa-times" data-action="delete" aria-label="Supprimer dans ma liste d\'amis"></span>
                                 </li>';
                     }
-                    
                 }
 
             ?>
@@ -112,13 +103,16 @@
 <?php
     $currentUser = $_SESSION['pseudo'];
     $initialRoom = Akham::allEntities('rooms')[0]['nom'];
+    $type = "user";
+    if(!(isset($_SESSION['currentUser']))) $type = "guest";
 ?>
 
 <script>
 
     var currentUser = {
         username: "<?= $currentUser ?>",
-        room: "<?= $initialRoom ?>"
+        room: "<?= $initialRoom ?>",
+        type: "<?= $type ?>"
     };
 
     socket.emit('getCurrentUser', currentUser);
