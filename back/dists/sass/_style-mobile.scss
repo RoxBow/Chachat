@@ -163,6 +163,7 @@
             width: 50%;
             color: #ffffff;
             display: flex;
+            align-items: flex-end;
             position: absolute;
             top: 0;
             left: -50%;
@@ -170,8 +171,37 @@
 
             div {
                 width: 50%;
-                height: 100%;
+                height: 95%;
                 background-color: $primary-color;
+
+                &.header-chat {
+                    height: 5%;
+                    width: 100%;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    border-bottom: 1px solid#000000;
+                    
+                    ul {
+                        display: flex;
+                        position: relative;
+                        height: 100%;
+                        li {
+                            cursor: pointer;
+                            margin-left: 25px;
+
+                            &:first-child {
+                                margin-left: 10px;
+                            }
+                            span {
+                                font-size: 20px;
+                                position: absolute;
+                                top: 50%;
+                                transform: translateY(-50%);
+                            }
+                        }
+                    }
+                }
 
                 &:last-child {
                     background-color: $second-color;
@@ -251,7 +281,7 @@
 
                 ul {
                     flex-direction: row;
-                    padding: 0;
+                    padding: 0 2px;
                     overflow-y: inherit;
                     li {
                         position: relative;
@@ -357,7 +387,7 @@
 
                     form {
                         align-self: flex-end;
-                        width: 100%;
+                        width: 80%;
                         height: 100%;
                         input {
                             color: $couleur-textes;
@@ -370,17 +400,6 @@
                             width: 100%;
                             opacity: .8;
                         }
-                        &::after {
-                            content: '\f00c';
-                            font-family: fontAwesome;
-                            position: absolute;
-                            right: 12%;
-                            top: 50%;
-                            transform: translateY(-50%);
-                            z-index: 2;
-                            cursor: pointer;
-                            color: white
-                        }
                     }
 
                     button {
@@ -388,7 +407,12 @@
                         background-color: $second-color;
                         border: none;
                         color: #ffffff;
-                    }
+                        cursor: pointer;
+
+                        &:first-child {
+                            border-right: 1px solid #fff;
+                        }
+                    } // button
                 } // wrapper-input-chat
 
                 
@@ -434,6 +458,7 @@
                     padding-left: 40px;
                     border-radius: 20px;
                     position: relative;
+                    color: $couleur-textes;
                     height: 36px;
                     width: 100%;
                 } // input

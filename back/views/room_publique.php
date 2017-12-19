@@ -1,5 +1,12 @@
 <main class="main-chat">
     <section class="wrapper-info-room">
+        <div class="header-chat">
+            <ul>
+                <li><a href="./index.php?action=kill"><span role="button" class="fa fa-power-off" aria-label="Se déconnecter"></span></a></li>
+                <li><span role="button" class="fa fa-user" aria-label="Paramètres profil"></span></li>
+                <li><span role="button" class="fa fa-bell" aria-label="Notification"></span></li>
+            </ul>
+        </div>
         <div>
             <h2>Salon</h2>
             <ul class="list-room">
@@ -16,7 +23,7 @@
         </div>
         <div>
             <div class="wrapper-icone-room">
-                <span class="fa fa-commenting-o fa-2x"></span>
+                <span role="button" class="fa fa-commenting-o fa-2x"></span>
             </div>
             <h2>En ligne</h2>
             <ul id="listUsers">
@@ -27,10 +34,10 @@
 
     <section class="wrapper-chat">
         <div class="onglets-prives">
-            <ul>
-                <li>Elmarino <span class="fa fa-times" aria-label="Fermer onglet"></span></li>
-                <li>Vince<span class="fa fa-times" aria-label="Fermer onglet"></span></li>
-                <li>Dylan<span class="fa fa-times" aria-label="Fermer onglet"></span></li>
+            <ul id="listConv">
+                <li>Elmarino <span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
+                <li>Vince<span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
+                <li>Dylan<span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
             </ul>
         </div>
         <h2 id="nameRoom">Ingrid Arnaud</h2>
@@ -48,7 +55,8 @@
                     <input type="text" name="" id="message" placeholder="Votre message">
                 </form>
 
-                <button class="fa fa-pencil"></button>
+                <button class="fa fa-check" type="button" aria-label="Envoyer le message"></button>
+                <button class="fa fa-pencil" type="button" aria-label="Ouvrir la zone de dessin"></button>
             </div>
             
         </div>
@@ -56,7 +64,7 @@
 
     <section class="wrapper-list-amis">
         <div class="wrapper-icone-amis">
-            <span class="fa fa-smile-o fa-2x"></span>
+            <span role="button" class="fa fa-smile-o fa-2x"></span>
         </div>
         <h2>Amis</h2>
         <ul  id="listFriends">
@@ -71,7 +79,6 @@
 
             ?>
         </ul>
-        <a href="./index.php?action=kill">Déconnection</a>
         
         <form action="">
             <input type="text" placeholder="Rechercher">
