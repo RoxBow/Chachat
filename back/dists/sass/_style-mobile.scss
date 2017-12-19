@@ -193,6 +193,12 @@
                             &:first-child {
                                 margin-left: 10px;
                             }
+                            &:last-child {
+                                position: absolute;
+                                top: 50%;
+                                transform: translateY(-50%);
+                                left: 60px;
+                            }
                             span {
                                 font-size: 20px;
                                 position: absolute;
@@ -327,7 +333,17 @@
                             background-color: rgba(0,0,0,0.2);
                         }
 
-                        span {
+                        span:first-child {
+                            position: relative;
+                            display: inline-block;
+                            margin-left: 2px;
+
+                            &::after {
+                                content: none;
+                            }
+                        }
+
+                        span:last-child {
                             position: absolute;
                             top: 5px;
                             right: 5px;
@@ -429,7 +445,6 @@
                     bottom: 0;
 
                     form {
-                        align-self: flex-end;
                         width: 80%;
                         height: 100%;
                         input {
@@ -442,18 +457,22 @@
                             height: 100%;
                             width: 100%;
                             opacity: .8;
+
+                            &.erreur-input {
+                                border: 2px solid rgba(255,0,0,0.6);
+                            }
                         }
                     }
 
                     button {
                         width: 10%;
                         background-color: $second-color;
-                        border: none;
+                        border-color: $second-color;
                         color: #ffffff;
                         cursor: pointer;
 
-                        &:first-child {
-                            border-right: 1px solid #fff;
+                        &:last-child {
+                            border-left: 1px solid #fff;
                         }
                     } // button
                 } // wrapper-input-chat
@@ -487,6 +506,21 @@
             ul {
                 li {
                     padding: 3% 15%;
+
+                    &:hover {
+                        background-color: $second-color;
+                    }
+
+                    span {
+                        margin-right: 5px;
+                        cursor: pointer;
+                        &.fa-times {
+                            color: #ff0000;
+                        }
+                        &.fa-check {
+                            color: #008020;
+                        }
+                    } // span
                 } // li
             } // ul
 
@@ -519,12 +553,7 @@
 } // main-chat
 
 .popin {
-    display: none;
     .wrapper-popin {
         width: 70%;
     } // wrapper-popin
 } // popin
-
-.notification {
-    display: none;
-}

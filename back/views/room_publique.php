@@ -3,8 +3,9 @@
         <div class="header-chat">
             <ul>
                 <li><a href="./index.php?action=kill"><span role="button" class="fa fa-power-off" aria-label="Se déconnecter"></span></a></li>
-                <li><span role="button" class="fa fa-user" aria-label="Paramètres profil"></span></li>
                 <li><span role="button" class="fa fa-bell" aria-label="Notification"></span></li>
+                <li><span role="button" class="fa fa-user" aria-label="Paramètres profil"></span></li>
+                <li class="pseudo-current-user">Bendo</li>
             </ul>
         </div>
         <div>
@@ -23,7 +24,7 @@
         </div>
         <div>
             <div class="wrapper-icone-room">
-                <span role="button" class="fa fa-commenting-o fa-2x"></span>
+                <span role="button" class="fa fa-commenting-o fa-2x" aria-label="Bouton panel salon"></span>
             </div>
             <h2>En ligne</h2>
             <ul id="listUsers">
@@ -35,7 +36,7 @@
     <section class="wrapper-chat">
         <div class="onglets-prives">
             <ul id="listConv">
-                <li>Elmarino <span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
+                <li>Elmarino <span class="badge" aria-label="bulle de notification">1</span> <span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
                 <li>Vince<span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
                 <li>Dylan<span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
             </ul>
@@ -44,15 +45,16 @@
 
         <div>
             <ul id="listMessage">
-                <li class="current-user"><span>Pseudo-user</span>Hello</li>
-                <li><span>Pseudo-user</span>Comment vas-tu ?</li>
-                <li class="current-user"><span>Pseudo-user</span>Très bien merci</li>
-                <li><span>Pseudo-user</span>Ok</li>
+                <li class="current-user"><span aria-label="pseudo de l'utilisateur">Pseudo-user</span>Hello</li>
+                <li><span aria-label="pseudo de l'utilisateur">Pseudo-user</span>Comment vas-tu ?</li>
+                <li class="current-user"><span aria-label="pseudo de l'utilisateur">Pseudo-user</span>Très bien merci</li>
+                <li><span aria-label="pseudo de l'utilisateur">Pseudo-user</span>Ok</li>
             </ul>
 
             <div class="wrapper-input-chat">
+                <span class="tooltip" aria-label="Message d'erreur de saisie">Champs vide</span>
                 <form action="">
-                    <input type="text" name="" id="message" placeholder="Votre message">
+                    <input type="text" name="" id="message" placeholder="Votre message" class="erreur-input">
                 </form>
 
                 <button class="fa fa-check" type="button" aria-label="Envoyer le message"></button>
@@ -67,7 +69,12 @@
             <span role="button" class="fa fa-smile-o fa-2x"></span>
         </div>
         <h2>Amis</h2>
-        <ul  id="listFriends">
+        <ul id="listFriends">
+            <li><span class="fa fa-times"></span><span class="fa fa-check"></span>Elmarino</li>
+            <li><span class="fa fa-times"></span>Vince</li>
+            <li><span class="fa fa-times"></span>Vince</li>
+            <li><span class="fa fa-times"></span><span class="fa fa-check"></span>Dylan</li>
+            <li><span class="fa fa-times"></span>Malika Menard</li>
             <?php
                 // display our friends
 	
