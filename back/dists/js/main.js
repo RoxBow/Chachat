@@ -4,7 +4,7 @@ $('.wrapper-icone-room span').on('click', function() {
     if ($(this).hasClass('selected')) {
         $('.wrapper-info-room').css("left", "0");
     } else {
-        $('.wrapper-info-room').css("left", "-50%");
+        $('.wrapper-info-room').css("left", "-70%");
     }
 });
 

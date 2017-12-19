@@ -4,7 +4,7 @@
     </div>
     
     <section class="wrapper-link-home">
-        <span class="fa fa-picture-o fa-5x"></span>
+        <img src="./dists/images/logo.png" alt="logo de Chachat">
         <ul>
             <li class="li-login selected">
                 <p>
