@@ -20,28 +20,7 @@
             </div>
             <h2>En ligne</h2>
             <ul id="listUsers">
-                <li>
-                    <span class="fa fa-plus-circle" aria-label="Ajouter dans ma liste d'amis"></span>
-                    <span class="icon-user fa fa-user-circle-o" aria-label="Avatar de l'utilisateur"></span>
-                    Benjamin
-                </li>
-
-                <li>
-                    <span class="fa fa-times" aria-label="Ajouter dans ma liste d'amis"></span>
-                    <span class="icon-user fa fa-user-circle-o" aria-label="Avatar de l'utilisateur"></span>
-                    Vincent
-                </li>
-                <?php
-                    //display all people online
-
-                    foreach (allOnline() as $value) {
-                        if($value['pseudo'] === $_SESSION['pseudo']){
-                            echo '<li data-name="'.$value['pseudo'].'">'.$value['pseudo'].'</li>';
-                        } else {
-                            echo '<li data-name="'.$value['pseudo'].'">'.$value['pseudo'].'<span data-action="add">&nbsp;Ajouter&nbsp;</span></li>';
-                        }
-                    }
-                ?>
+               <!-- Injected by Js -->
             </ul>
         </div>
     </section>
@@ -78,7 +57,9 @@
                 // display our friends
 	
                 foreach (myFriends($_SESSION['currentUser']) as $value) {
-                    echo '<li data-name="'.$value['secondUser'].'">'.$value['secondUser'].'<span data-action="delete">&nbsp;Supprimer&nbsp;</span></li>';
+                    echo '<li data-name="'.$value['secondUser'].'">'.$value['secondUser'].'
+                             <span title="Supprimer" class="fa fa-times" data-action="delete" aria-label="Supprimer dans ma liste d\'amis"></span>
+                            </li>';
                 }
 
             ?>

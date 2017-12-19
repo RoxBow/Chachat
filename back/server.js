@@ -52,10 +52,10 @@ io.sockets.on('connection', (socket) => {
         socket.emit('cleanRoom', user.room);
 
         // Create a user
-        let User = { id: socket.id ,username: user.username };
-        listUsers.push(User);
+        findOrCreateUser(socket.id, user.username);
 
-        updateListUser(listUsers, listRooms);
+        // Send new list user to client
+        io.emit('updateUser', listUsers);
 
         // Send all old message to new connection user
         // if room got message
@@ -80,17 +80,43 @@ io.sockets.on('connection', (socket) => {
         }
     });
 
-    socket.on('addFriend', (userAdded) => {
-        let query = `INSERT INTO friends (firstUser, secondUser) VALUES (${socket.username}, ${userAdded})`;
-        let userAddedId = findUser(userAdded);
+    /* ### Friend ### */
+    socket.on('askFriend', (friendAdded) => {
+        let query = `INSERT INTO friends (firstUser, secondUser) VALUES ('${socket.username}', '${friendAdded}')`;
+        let friendId = findUser(friendAdded);
 
         db.query(query, (err) => {
             if (err) throw err;
-            console.log(socket.username +" add "+userAdded +" as friend");
+
+            socket.emit('askFriend', { type:'pending', username: friendAdded });
+            socket.broadcast.to(friendId).emit('askFriend', { type:'answer', username: socket.username } );
         });
 
-        socket.emit('addFriend', { type:'pending', username: userAdded });
-        io.sockets.socket(userAddedId).emit('addFriend', { type:'ask', username: socket.username } );
+    });
+
+    // Answer accept friend
+    socket.on('friendAccept', (friend) => {
+        let query = `UPDATE friends SET state = 'accepted' WHERE firstUser = '${friend}' AND secondUser = '${socket.username}' `;
+
+        let idFriend = findUser(friend);
+
+        db.query(query, (err) => {
+            if (err) throw err;
+            socket.emit('updateAskFriend', { type:'accept', username: friend });
+            socket.broadcast.to(idFriend).emit('updateAskFriend', { type:'accept', username: socket.username } );
+        });
+    });
+
+    // Answer refuse friend
+    socket.on('friendDelete', (friend) => {
+        let query = ` DELETE FROM friends WHERE firstUser = '${friend}' OR firstUser = '${socket.username}' `;
+        let idFriend = findUser(friend);
+
+        db.query(query, (err) => {
+            if (err) throw err;
+            socket.emit('updateAskFriend', { type:'delete', username: friend });
+            socket.broadcast.to(idFriend).emit('updateAskFriend', { type:'delete', username: socket.username } );
+        });
     });
 
     socket.on('disconnect', () => {
@@ -118,6 +144,7 @@ function registerMsg(socket, roomUser, msg) {
     }
 }
 
+// Return old message depends of room
 function getHistoryMsg(roomUser) {
     let allMsg = null;
 
@@ -131,7 +158,7 @@ function getHistoryMsg(roomUser) {
     return allMsg;
 }
 
-
+// Return socket.id with parameter username
 function findUser(username) {
     let socketIdFind = null;
 
@@ -144,8 +171,18 @@ function findUser(username) {
     return socketIdFind;
 }
 
-function updateListUser(listUser, listRoom){
-    listRoom.forEach(function(room) {
-        io.sockets.in(room).emit('updateUser', listUser);
+function findOrCreateUser(socketId, username) {
+    let userFinded = null;
+
+    listUsers.forEach(function(user) {
+        if(user.username === username){
+            userFinded = true;
+        }
     });
+
+    // If user doesn't exist then create it
+    if(!userFinded){
+        let User = { id: socketId, username: username };
+        listUsers.push(User);
+    }
 }

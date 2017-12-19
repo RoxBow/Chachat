@@ -18,8 +18,8 @@ $('.onglet-rooms, .onglet-friends').on('click', () => {
         $('.wrapper-friends').hide();
     }
     else {
-        $('.wrapper-friends').show();
         $('.wrapper-section-rooms').hide();
+        $('.wrapper-friends').show();
     }
 });
 
@@ -54,11 +54,6 @@ $('form').submit((e) => {
     return false;
 });
 
-$('li', '.list-room').on('click', function () {
-    let roomSelected = $(this).attr('id');
-    socket.emit('joinRoom', roomSelected);
-});
-
 socket.on('sendMessage', (msg) => {
 
     let username = msg.username;
@@ -70,7 +65,7 @@ socket.on('sendMessage', (msg) => {
     }
 });
 
-// Receive all old messages
+// Receive history messages
 socket.on('updateMessage', (oldMsg) => {
 
     oldMsg.forEach(function (msg) {
@@ -87,24 +82,70 @@ socket.on('cleanRoom', (nameRoom) => {
     $('#nameRoom').text(nameRoom);
 });
 
-// Add friend
-$('li span', '#listUsers').on('click', function () {
+/* ### FRIEND ### */
+
+// Listener click - Add friend
+$("#listUsers").on("click", "li span", function(){
     let nameFriendAdded = $(this).parent().attr('data-name');
-    socket.emit('addFriend', nameFriendAdded);
+    console.log($(this));
+    socket.emit('askFriend', nameFriendAdded);
 });
 
-socket.on('addFriend', (ask) => {
+// Update list friend
+socket.on('askFriend', (ask) => {
+
     if(ask.type === "pending"){
-        $('#listFriends').append('<li data-name="'+ask.username+'">'+ask.username+' <span data-actio="delete">Supprimer</span></li>');
-    } else if (ask.type === "ask"){
-        $('#listFriends').append('<li data-name="'+ask.username+'">'+ask.username+' <span data-action="accept">Accepter</span><span data-action="delete">Supprimer</span></li>');
+        $('#listFriends').append('<li class="pending" data-name="'+ask.username+'">'+ask.username+' <span data-action="delete">Supprimer</span></li>');
+    } else if (ask.type === "answer"){
+        $('#listFriends').append('<li class="pending" data-name="'+ask.username+'">'+ask.username+' <span data-action="accept">Accepter</span><span data-action="delete">Supprimer</span></li>');
     }
 });
 
+$("#listFriends").on("click", "li span", function(){
+    let nameUserAsk = $(this).parent().attr('data-name');
+
+    if($(this).attr('data-action') === "accept"){
+        socket.emit('friendAccept', nameUserAsk);
+    } else if($(this).attr('data-action') === "delete"){
+        socket.emit('friendDelete', nameUserAsk);
+    }
+});
+
+
+// Update list friend
+socket.on('updateAskFriend', (response) => {
+
+    if(response.type === "accept"){
+        $('#listFriends').find(`[data-name='${response.username}']`).removeClass('pending').addClass('friend-in');
+        $('#listFriends').find(`[data-name='${response.username}']`).find("[data-action='accept']").remove();
+    } else if (response.type === "delete"){
+        $('#listFriends').find(`[data-name='${response.username}']`).remove();
+    }
+});
+
+/* ### ROOM ### */
+
+
+// Lister click - Join room
+$(".list-room").on("click", "li", function(){
+    let roomSelected = $(this).attr('id');
+    socket.emit('joinRoom', roomSelected);
+});
+
+// Update list user
 socket.on('updateUser', (listUser) => {
-    $('#listUsers').empty();
+    console.log(listUser);
+    $('#listUsers').empty(); // clean list
 
     listUser.forEach(function(user) {
-        $('#listUsers').append('<li>'+user+'</li>');
+        if(user.username === currentUser.username){
+            $('#listUsers').append('<li class="current-user" data-name="'+user.username+'">' +
+                '<span class="icon-user fa fa-user-circle-o" aria-label="Avatar de l\'utilisateur"></span>'
+                + user.username +'</li>');
+        } else {
+            $('#listUsers').append('<li class="current-user" data-name="'+user.username+'">' +
+                '<span title="Ajouter" class="fa fa-plus-circle" data-action="add" aria-label="Ajouter dans ma liste d\'amis"></span>' +
+                '<span class="icon-user fa fa-user-circle-o" aria-label="Avatar de l\'utilisateur"></span>' + user.username +'</li>');
+        }
     });
 });
