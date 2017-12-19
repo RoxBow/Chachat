@@ -2,12 +2,8 @@
 
 
 switch ($action) {
-    case 'login_form':
-        
-        $login_message = 'Connectez-vous';
-        break;
-    
     case 'login':
+        $_SESSION['error'] = false;
         $pseudonyme = test_input($_POST["pseudo"]);
         $password = $_POST["password"];
 
@@ -29,7 +25,7 @@ switch ($action) {
         break;
 
     case 'register':
-
+        $_SESSION['error'] = false;
         $email = test_input($_POST["email"]);
         $pseudonyme = test_input($_POST["pseudo"]);
         $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
