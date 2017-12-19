@@ -8,19 +8,19 @@
         <ul>
             <li class="li-login selected">
                 <p>
-                    <span class="fa fa-user fa-2x"></span>
+                    <span class="fa fa-user fa-2x" aria-label="Icon de connexion"></span>
                     Connexion
                 </p>
             </li>
             <li class="li-register">
                 <p>
-                    <span class="fa fa-user fa-2x"></span>
+                    <span class="fa fa-user fa-2x" aria-label="Icon de s'enregistrer"></span>
                     S'enregistrer
                 </p>
             </li>
             <li class="li-guest">
                 <p>
-                    <span class="fa fa-user fa-2x"></span>
+                    <span class="fa fa-user fa-2x" aria-label="Icon de connexion guest"></span>
                     Invité
                 </p>
             </li>

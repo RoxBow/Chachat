@@ -140,7 +140,7 @@
                     input[type=submit] {
                         border: none;
                         height: 40px;
-                        width: 250px;
+                        min-width: 250px;
                         border-radius: 8px;
                         margin: 15px;
                         cursor: pointer;
