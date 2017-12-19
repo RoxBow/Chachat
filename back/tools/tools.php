@@ -66,10 +66,14 @@ function allEntities($tableName){
 }
 
 function myFriends($aUser){
-	$query = "SELECT secondUser,state FROM friends WHERE firstUser='".$aUser->pseudo."'";
+	$query = "SELECT secondUser FROM friends WHERE firstUser='".$aUser->pseudo."'";
+	$query2 = "SELECT firstUser FROM friends WHERE secondUser='".$aUser->pseudo."'";
 	$entity = myFetchAllAssoc($query);
+	$entity2 = myFetchAllAssoc($query2);
 
-	return $entity;
+	$allFriends = array_merge($entity, $entity2);
+
+	return $allFriends;
 }
 
 function allOnline(){

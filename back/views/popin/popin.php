@@ -8,7 +8,7 @@
         </div>
 
         <div class="popin-content">
-            <p class="popin-texte">Login incorrect</p>
+            <p class="popin-texte"><?= $_SESSION['contentError']?></p>
         </div>
     </div>
 </div>

@@ -22,14 +22,12 @@ switch ($action) {
         if( in_array($pseudonyme, $pseudo_tab) && password_verify($password , $user->password) ){
             start_session($user);
         } else{
-            echo 'Mauvais id ou mot de passe';
+            $_SESSION['error'] = true;
+            $_SESSION['contentError'] = 'Mauvais identifiant ou votre mot de passe ne correspond pas';
+            header ('location: index.php');
         }
         break;
-        
-    case 'register_form':
-        # code...
-        break;
-    
+
     case 'register':
 
         $email = test_input($_POST["email"]);
@@ -53,16 +51,24 @@ switch ($action) {
 
                 start_session($newUser);
             } else{
-                echo 'Pseudo déjà utilisé';
+                $_SESSION['error'] = true;
+                $_SESSION['contentError'] = 'Pseudo déjà utilisé';
+                header ('location: index.php');
             }
         } else{
-            //$popIn = file_get_contents('path/to/YOUR/FILE.php');
-            //header('Location: index.php');
-            echo 'Email déjà utilisé !';
+            $_SESSION['error'] = true;
+            $_SESSION['contentError'] = 'Email déjà utilisé';
+            header ('location: index.php');
         }
 
         break;
+    case 'guest':
+        
+        $_SESSION['pseudo'] = uniqid('php_');
 
+        // on redirige notre visiteur vers une page de notre section membre
+        header('Location: index.php?action=room_publique');
+        break;
     case 'kill':
 
         // On détruit les variables de notre  et on met à false l'attribut login dans la base de donnée
@@ -78,7 +84,7 @@ switch ($action) {
 
         // On redirige le visiteur vers la page d'accueil
         header ('location: index.php');
-        
+
         break;
     
     default:
