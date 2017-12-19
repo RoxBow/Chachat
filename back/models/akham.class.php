@@ -53,10 +53,18 @@ Class Akham{
 
             foreach ($this->fields as $value) {
                 if ($value != $this->pk && $value != 'id') {
-                    if ($value === end($this->fields)) {
-                        $temp.=$value.'="'.$this->$value.'"';
+                    if($value == 'login'){
+                        if ($value === end($this->fields)) {
+                            $temp.=$value.'='.($this->$value ? 'true' : 'false').'';
+                        } else{
+                            $temp.=$value.'='.($this->$value ? 'true' : 'false').', ';
+                        }
                     } else{
-                        $temp.=$value.'="'.$this->$value.'", ';
+                        if ($value === end($this->fields)) {
+                            $temp.=$value.'="'.$this->$value.'"';
+                        } else{
+                            $temp.=$value.'="'.$this->$value.'", ';
+                        }
                     }
                 }
                 
@@ -73,14 +81,25 @@ Class Akham{
             foreach ($this->fields as $value) {
 
                 if ($value != 'id') {
-                    if ($value === end($this->fields)) {
-                        $temp_columns.=$value.'';
-                        $temp_values.='\''.$this->$value.'\'';
+                    if($value == 'login'){
+                        if ($value === end($this->fields)) {
+                            $temp_columns.=$value.'';
+                            $temp_values.= $this->$value ? 'true' : 'false';
+                        } else{
+                            $temp_columns.=$value.',';
+                            $temp_values.= ($this->$value ? 'true' : 'false').', ';
+                        }
                     } else{
-                        $temp_columns.=$value.',';
-                        $temp_values.='\''.$this->$value.'\', ';
+                        if ($value === end($this->fields)) {
+                            $temp_columns.=$value.'';
+                            $temp_values.='\''.$this->$value.'\'';
+                        } else{
+                            $temp_columns.=$value.',';
+                            $temp_values.='\''.$this->$value.'\', ';
+                        }
                     }
                 }
+
             }
 
             $query_insert = 'INSERT INTO '.$this->table_name.' ('.$temp_columns.') VALUES ('.$temp_values.');';
