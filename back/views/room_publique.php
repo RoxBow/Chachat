@@ -5,7 +5,9 @@
                 <li><a href="./index.php?action=kill"><span role="button" class="fa fa-power-off" aria-label="Se déconnecter"></span></a></li>
                 <li><span role="button" class="fa fa-bell" aria-label="Notification"></span></li>
                 <li><span role="button" class="fa fa-user" aria-label="Paramètres profil"></span></li>
-                <li class="pseudo-current-user">Bendo</li>
+                <li class="pseudo-current-user">
+                <?= $_SESSION['pseudo'] ?>
+                </li>
             </ul>
         </div>
         <div>
@@ -54,7 +56,7 @@
             <div class="wrapper-input-chat">
                 <span class="tooltip" aria-label="Message d'erreur de saisie">Champs vide</span>
                 <form action="">
-                    <input type="text" name="" id="message" placeholder="Votre message" class="erreur-input">
+                    <input type="text" name="" id="message" placeholder="Votre message">
                 </form>
 
                 <button class="fa fa-check" type="button" aria-label="Envoyer le message"></button>
@@ -66,15 +68,15 @@
 
     <section class="wrapper-list-amis">
         <div class="wrapper-icone-amis">
-            <span role="button" class="fa fa-smile-o fa-2x"></span>
+            <span role="button" class="fa fa-smile-o fa-2x"  aria-label="Bouton affichage panel amis"></span>
         </div>
         <h2>Amis</h2>
         <ul id="listFriends">
-            <li><span class="fa fa-times"></span><span class="fa fa-check"></span>Elmarino</li>
-            <li><span class="fa fa-times"></span>Vince</li>
-            <li><span class="fa fa-times"></span>Vince</li>
-            <li><span class="fa fa-times"></span><span class="fa fa-check"></span>Dylan</li>
-            <li><span class="fa fa-times"></span>Malika Menard</li>
+            <li><span class="fa fa-times" aria-label="Supprimer l'amis"></span><span class="fa fa-check" aria-label="Accepter l'amis"></span>Elmarino</li>
+            <li><span class="fa fa-times" aria-label="Supprimer l'amis"></span>Vince</li>
+            <li><span class="fa fa-times" aria-label="Supprimer l'amis"></span>Vince</li>
+            <li><span class="fa fa-times" aria-label="Supprimer l'amis"></span><span class="fa fa-check" aria-label="Accepter l'amis"></span>Dylan</li>
+            <li><span class="fa fa-times" aria-label="Supprimer l'amis"></span>Malika Menard</li>
             <?php
                 // display our friends
 	
