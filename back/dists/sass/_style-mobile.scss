@@ -189,7 +189,7 @@
                     position: absolute;
                     color: $couleur-textes;
                     right: -40px;
-                    top: 5px;
+                    top: 5%;
                     background: transparent;
                     width: auto;
                 }
@@ -244,13 +244,55 @@
             background: -webkit-linear-gradient(top,  #9f44ca 0%,#2989d8 50%,#4086e9 51%,#9f44ca 100%); /* Chrome10-25,Safari5.1-6 */
             background: linear-gradient(to bottom,  #9f44ca 0%,#2989d8 50%,#4086e9 51%,#9f44ca 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9f44ca', endColorstr='#9f44ca',GradientType=0 ); /* IE6-9 */
+            .onglets-prives {
+                height: 5%;
+                background-color: rgba(0, 0, 0, .2);
+                border-bottom: 1px solid rgba(0,0,0,0.2);
+
+                ul {
+                    flex-direction: row;
+                    padding: 0;
+                    overflow-y: inherit;
+                    li {
+                        position: relative;
+                        margin: 0;
+                        height: 100%;
+                        width: 25%;
+                        border-radius: inherit;
+                        border-top-left-radius: 8px;
+                        border-top-right-radius: 8px;
+                        padding: 10px 5px;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        background: rgba(0,0,0,0.5);
+                        color: $couleur-textes;
+                        border: 1px solid #000000;
+                        border-bottom: none;
+
+                        &.selected {
+                            background-color: rgba(0,0,0,0.2);
+                        }
+
+                        span {
+                            position: absolute;
+                            top: 5px;
+                            right: 5px;
+
+                            &::after {
+                                content: none;
+                            }
+                        }
+                    }
+                }
+            } // onglets-prives
 
             h2 {
                 text-align: center;
                 color: #ffffff;
                 padding: 10px;
                 background-color: rgba(0, 0, 0, .2);
-                height: 10%;
+                height: 5%;
                 line-height: 1.2;
             }
 
@@ -367,7 +409,7 @@
                 position: absolute;
                 color: $couleur-textes;
                 left: -35px;
-                top: 5px;
+                top: 5%;
             }
 
             h2 {

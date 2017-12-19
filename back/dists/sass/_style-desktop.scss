@@ -185,13 +185,16 @@
             background: linear-gradient(to bottom,  #9f44ca 0%,#2989d8 50%,#4086e9 51%,#9f44ca 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#9f44ca', endColorstr='#9f44ca',GradientType=0 ); /* IE6-9 */
 
-            h2 {
-                text-align: center;
-                color: #ffffff;
-                padding: 10px;
-                background-color: rgba(0, 0, 0, .2);
-                height: 10%;
-                line-height: 1.2;
+            .onglets-prives {
+                ul {
+                    li {
+                        width: 20%;
+                        cursor: pointer;
+                        &:hover {
+                            background-color: rgba(0,0,0,0.2);
+                        }
+                    }
+                }
             }
 
             div {

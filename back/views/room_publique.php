@@ -26,6 +26,13 @@
     </section>
 
     <section class="wrapper-chat">
+        <div class="onglets-prives">
+            <ul>
+                <li>Elmarino <span class="fa fa-times" aria-label="Fermer onglet"></span></li>
+                <li>Vince<span class="fa fa-times" aria-label="Fermer onglet"></span></li>
+                <li>Dylan<span class="fa fa-times" aria-label="Fermer onglet"></span></li>
+            </ul>
+        </div>
         <h2 id="nameRoom">Ingrid Arnaud</h2>
 
         <div>

@@ -1,11 +1,18 @@
-$('.header__icon').on('click', (e) => {
-    e.preventDefault();
-    $('body').toggleClass('with--sidebar');
-});
-
+// Ajout la classe 'selected' lorsque l'on clique sur un des salon
 $('.list-room li').on('click', function () {
     $('.list-room li.selected').removeClass('selected');
     $(this).addClass('selected');
+});
+
+// Ajoute la classe 'selected' quand on clique sur un onglet privé
+$('.onglets-prives ul li').on('click', function () {
+    $('.onglets-prives ul li').removeClass('selected');
+    $(this).addClass('selected');
+});
+
+// Supprime l'onglet privé quand on clique sur la croix
+$('.onglets-prives ul li span').on('click', function () {
+    $(this).parent().remove();
 });
 
 // Action lors du clique sur les onglets de la page de chat
