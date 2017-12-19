@@ -1,11 +1,9 @@
 <?php
-
-session_start ();
-
 require_once('tools/tools.php');
 // ROUTING
 require_once('routes.php');
 
+session_start ();
 
 if ( empty($_GET['action']) ){
 	$action = 'home';

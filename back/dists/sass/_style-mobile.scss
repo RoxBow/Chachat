@@ -279,15 +279,38 @@
                 background-color: rgba(0, 0, 0, .2);
                 border-bottom: 1px solid rgba(0,0,0,0.2);
 
+                // style scrollbar
+                #listConv::-webkit-scrollbar-track
+                {
+                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                    border-radius: 10px;
+                    background-color: #F5F5F5;
+                }
+                
+                #listConv::-webkit-scrollbar
+                {
+                    height: 5px;
+                    background-color: #F5F5F5;
+                }
+                
+                #listConv::-webkit-scrollbar-thumb
+                {
+                    border-radius: 10px;
+                    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+                    background-color: #555;
+                }
+
                 ul {
                     flex-direction: row;
                     padding: 0 2px;
                     overflow-y: inherit;
+                    overflow-x: auto;
+
                     li {
                         position: relative;
                         margin: 0;
                         height: 100%;
-                        width: 25%;
+                        min-width: 15%;
                         border-radius: inherit;
                         border-top-left-radius: 8px;
                         border-top-right-radius: 8px;
@@ -326,6 +349,26 @@
                 line-height: 1.2;
             }
 
+            #listMessage::-webkit-scrollbar-track
+            {
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+                border-radius: 10px;
+                background-color: #F5F5F5;
+            }
+            
+            #listMessage::-webkit-scrollbar
+            {
+                width: 10px;
+                background-color: #F5F5F5;
+            }
+            
+            #listMessage::-webkit-scrollbar-thumb
+            {
+                border-radius: 10px;
+                -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+                background-color: #555;
+            }
+
             div {
                 height: 80%;
                 ul {
@@ -333,7 +376,7 @@
                     flex-direction: column;
                     padding: 0 40px;
                     height: 100%;
-                    overflow-y: scroll;
+                    overflow-y: auto;
                     li {
                         background-color: $couleur-background-message;
                         width: 40%;
@@ -414,8 +457,6 @@
                         }
                     } // button
                 } // wrapper-input-chat
-
-                
             }
         } // wrapper-chat
 
