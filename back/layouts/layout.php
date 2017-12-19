@@ -16,6 +16,11 @@
     ?>
 </head>
 <body>
+    <?php
+        /* if( $_POST['error'] ){
+
+        } */
+    ?>
 
 <?php include($view_path); ?>
 
