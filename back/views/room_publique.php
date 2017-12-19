@@ -79,9 +79,16 @@
                 // display our friends
 	
                 foreach (myFriends($_SESSION['currentUser']) as $value) {
-                    echo '<li data-name="'.$value['secondUser'].'">'.$value['secondUser'].'
-                             <span title="Supprimer" class="fa fa-times" data-action="delete" aria-label="Supprimer dans ma liste d\'amis"></span>
+                    if(isset($value['secondUser'])){
+                        echo '<li data-name="'.$value['secondUser'].'">'.$value['secondUser'].'
+                                <span title="Supprimer" class="fa fa-times" data-action="delete" aria-label="Supprimer dans ma liste d\'amis"></span>
                             </li>';
+                    } else{
+                        echo '<li data-name="'.$value['firstUser'].'">'.$value['firstUser'].'
+                                    <span title="Supprimer" class="fa fa-times" data-action="delete" aria-label="Supprimer dans ma liste d\'amis"></span>
+                                </li>';
+                    }
+                    
                 }
 
             ?>

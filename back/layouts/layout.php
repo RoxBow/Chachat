@@ -17,9 +17,11 @@
 </head>
 <body>
     <?php
-        /* if( $_POST['error'] ){
-
-        } */
+        if( isset($_SESSION['error']) ){
+            if( $_SESSION['error'] ){
+                include_once('./views/popin/popin.php');
+            }
+        }
     ?>
 
 <?php include($view_path); ?>
