@@ -60,7 +60,7 @@ switch ($action) {
         break;
     case 'guest':
         
-        $_SESSION['pseudo'] = uniqid('php_');
+        $_SESSION['pseudo'] = uniqid('Guest');
 
         // on redirige notre visiteur vers une page de notre section membre
         header('Location: index.php?action=room_publique');

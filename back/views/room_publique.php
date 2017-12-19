@@ -35,7 +35,7 @@
         </div>
     </section>
 
-    <section class="wrapper-chat">
+    <section class="wrapper-chat <?php if(!(isset($_SESSION['currentUser']))){ echo 'asGuest'; }?>">
         <div class="onglets-prives">
             <ul id="listConv">
                 <li>Elmarino <span class="badge" aria-label="bulle de notification">1</span> <span role="button" class="fa fa-times" aria-label="Fermer onglet"></span></li>
@@ -65,6 +65,10 @@
             
         </div>
     </section>
+    
+    <?php 
+        if(isset($_SESSION['currentUser'])){
+    ?>
 
     <section class="wrapper-list-amis">
         <div class="wrapper-icone-amis">
@@ -100,6 +104,9 @@
             <input type="text" placeholder="Rechercher">
         </form>
     </section>
+    <?php
+        }
+    ?>
 </main>
 
 <?php
