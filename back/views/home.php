@@ -16,18 +16,3 @@
         <div class="wrapper-form"></div>
     </section>
 </main>
-
-<div class="popin" style="display: none;">
-    <div class="overlay"></div>
-    <div class="wrapper-popin">
-        <span class="close-popin fa fa-times"></span>
-        <div class="popin-header">
-            <span class="fa fa-times fa-2x"></span>
-            <h2 class="popin-title">ERREUR</h2>
-        </div>
-
-        <div class="popin-content">
-            <p class="popin-texte">Login incorrect</p>
-        </div>
-    </div>
-</div>
