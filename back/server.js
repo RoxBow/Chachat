@@ -119,6 +119,22 @@ io.sockets.on('connection', (socket) => {
         });
     });
 
+    /* ### CONVERSATION ### */
+
+    // Answer refuse friend
+    socket.on('begin-conv', (friend) => {
+        let idFriend = findUser(friend);
+
+        listUsers.forEach(function(user) {
+            if(user.username === socket.username){
+
+                user.push({ conversation: [] });
+            }
+        });
+
+
+    });
+
     socket.on('disconnect', () => {
         console.log(socket.username+" -> disconnect");
     });

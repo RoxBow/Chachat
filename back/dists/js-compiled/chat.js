@@ -95,7 +95,6 @@ socket.on('cleanRoom', nameRoom => {
 // Listener click - Add friend
 $("#listUsers").on("click", "li span", function () {
     let nameFriendAdded = $(this).parent().attr('data-name');
-    console.log($(this));
     socket.emit('askFriend', nameFriendAdded);
 });
 
@@ -150,4 +149,19 @@ socket.on('updateUser', listUser => {
             $('#listUsers').append('<li class="current-user" data-name="' + user.username + '">' + '<span title="Ajouter" class="fa fa-plus-circle" data-action="add" aria-label="Ajouter dans ma liste d\'amis"></span>' + '<span class="icon-user fa fa-user-circle-o" aria-label="Avatar de l\'utilisateur"></span>' + user.username + '</li>');
         }
     });
+});
+
+/* ### CHAT CONVERSATION ### */
+
+$("#listUsers").on("click", "li .begin-conv", function () {
+    let nameFriend = $(this).parent().attr('data-name');
+
+    // Create tab only if it not exist
+    if (!$('#listConv').find(`[data-name='${nameFriend}']`)) {
+        $('#listConv').append('<li>' + nameFriend + '</li>');
+    } else if ($('#listConv').find(`[data-name='${nameFriend}']`)) {
+        $('#listConv').find(`[data-name='${nameFriend}']`).addClass('selected');
+    }
+
+    socket.emit('begin-conv', nameFriend);
 });

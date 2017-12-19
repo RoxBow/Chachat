@@ -72,18 +72,18 @@ Class Akham{
             
             foreach ($this->fields as $value) {
 
-                if ($value === end($this->fields)) {
-                    $temp_columns.=$value.'';
-                    $temp_values.='\''.$this->$value.'\'';
-                } else{
-                    $temp_columns.=$value.',';                        
-                    $temp_values.='\''.$this->$value.'\', ';
+                if ($value != 'id') {
+                    if ($value === end($this->fields)) {
+                        $temp_columns.=$value.'';
+                        $temp_values.='\''.$this->$value.'\'';
+                    } else{
+                        $temp_columns.=$value.',';
+                        $temp_values.='\''.$this->$value.'\', ';
+                    }
                 }
-
             }
 
             $query_insert = 'INSERT INTO '.$this->table_name.' ('.$temp_columns.') VALUES ('.$temp_values.');';
-            
             myQuery($query_insert);
             
         }
