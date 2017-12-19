@@ -31,7 +31,7 @@
             top: 50%;
             left: 50%;
             transform: translateY(-50%) translateX(-50%);
-            width: 70%;
+            width: 65%;
 
             li {
                 font-size: 20px;
@@ -147,9 +147,6 @@
                 ul {
                     &.list-room {
                         li {
-                            padding: 3% 20%;
-                            cursor: pointer;
-
                             &.selected {
                                 background-color: $second-color;
                             }
@@ -162,9 +159,10 @@
 
                     &#listUsers {
                         li {
-                            padding: 3% 23%;
-                            cursor: pointer;
-                            
+                            &.current-user {
+                                color: $couleur-current-user;
+                            }
+
                             span {
                                 margin-right: 5px;
                             }
@@ -172,7 +170,7 @@
                             &:hover {
                                 background-color: $primary-color;
                             }
-                        }
+                        } // li
                     } // listUsers
                 } // ul
             } // div
@@ -346,3 +344,14 @@
         } // wrapper-list-amis
     } // section
 } // main-chat
+
+.popin {
+    display: none;
+    .wrapper-popin {
+        width: 25%;
+    } // wrapper-popin
+} // popin
+
+.notification {
+    display: none;
+}

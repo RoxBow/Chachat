@@ -5,7 +5,7 @@
     .section-menu {
         height: 100vh;
         position: absolute;
-        left: -30%;
+        left: -40%;
         width: 40%;
         background: #292c35;
         z-index: 2;
@@ -16,12 +16,16 @@
             & + .wrapper-link-home ul {
                 left: 5%;
             }
+
+            .burger-menu {
+                right: 10%;
+            }
         }
 
         .burger-menu {
             position: absolute;
             top: 2%;
-            right: 10%;
+            right: -15%;
             width: 18px;
             height: 23px;
             z-index: 2;
@@ -75,6 +79,7 @@
                 cursor: pointer;
                 font-size: 16px;
                 white-space: nowrap;
+                display: table;
 
                 span {
                     margin-right: 30px;
@@ -192,8 +197,12 @@
                 ul {
                     &.list-room {
                         li {
-                            padding: 3% 20%;
+                            padding: 3% 6%;
                             cursor: pointer;
+                            white-space: nowrap;
+                            width: 100%;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
 
                             &.selected {
                                 background-color: $second-color;
@@ -207,7 +216,11 @@
 
                     &#listUsers {
                         li {
-                            padding: 3% 23%;
+                            white-space: nowrap;
+                            width: 100%;
+                            overflow: hidden;
+                            text-overflow: ellipsis;
+                            padding: 3% 6%;
                             cursor: pointer;
                             
                             span {
@@ -398,8 +411,12 @@
 } // main-chat
 
 .popin {
+    display: none;
     .wrapper-popin {
         width: 70%;
-        height: 40%;
     } // wrapper-popin
 } // popin
+
+.notification {
+    display: none;
+}

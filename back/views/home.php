@@ -6,9 +6,24 @@
     <section class="wrapper-link-home">
         <span class="fa fa-picture-o fa-5x"></span>
         <ul>
-            <li class="li-login selected"><span class="fa fa-user fa-2x"></span>Login</li>
-            <li class="li-register"><span class="fa fa-user fa-2x"></span>S'enregistrer</li>
-            <li><span class="fa fa-user fa-2x"></span>Invité</li>
+            <li class="li-login selected">
+                <p>
+                    <span class="fa fa-user fa-2x"></span>
+                    Connexion
+                </p>
+            </li>
+            <li class="li-register">
+                <p>
+                    <span class="fa fa-user fa-2x"></span>
+                    S'enregistrer
+                </p>
+            </li>
+            <li class="li-guest">
+                <p>
+                    <span class="fa fa-user fa-2x"></span>
+                    Invité
+                </p>
+            </li>
         </ul>
     </section>
     <section class="wrapper-form-home">
@@ -16,18 +31,3 @@
         <div class="wrapper-form"></div>
     </section>
 </main>
-
-<div class="popin" style="display: none;">
-    <div class="overlay"></div>
-    <div class="wrapper-popin">
-        <span class="close-popin fa fa-times"></span>
-        <div class="popin-header">
-            <span class="fa fa-times fa-2x"></span>
-            <h2 class="popin-title">ERREUR</h2>
-        </div>
-
-        <div class="popin-content">
-            <p class="popin-texte">Login incorrect</p>
-        </div>
-    </div>
-</div>
