@@ -9,12 +9,21 @@ switch ($action) {
     
     case 'login':
         $pseudonyme = test_input($_POST["pseudo"]);
+        $password = $_POST["password"];
 
         $user = new User();
 		$user->pseudo = $pseudonyme;
-		$user->hydrate();      
+		$user->hydrate();  
         
-        start_session($user);
+        foreach (allEntities('users') as $value) {
+            $pseudo_tab[] = $value['pseudo'];
+        }
+
+        if( in_array($pseudonyme, $pseudo_tab) && password_verify($password , $user->password) ){
+            start_session($user);
+        } else{
+            echo 'Mauvais id ou mot de passe';
+        }
         break;
         
     case 'register_form':
@@ -25,17 +34,32 @@ switch ($action) {
 
         $email = test_input($_POST["email"]);
         $pseudonyme = test_input($_POST["pseudo"]);
-        $password = test_input($_POST["password"]);
-        //Register a new user in database
+        $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
-        $newUser = new User();
-        $newUser->pseudo = $pseudonyme;
-        $newUser->password = $password;
-        $newUser->email = $email;
-        $newUser->login = true;
-        $newUser->save();
+        //Register a new user in database if its a new pseudo & new email
+        foreach (allEntities('users') as $value) {
+            $pseudo_tab[] = $value['pseudo'];
+            $email_tab[] = $value['email'];
+        }
 
-        start_session($newUser);
+        if ( !in_array($email, $email_tab) ) {
+            if( !in_array($pseudonyme, $pseudo_tab) ){
+                $newUser = new User();
+                $newUser->pseudo = $pseudonyme;
+                $newUser->password = $password;
+                $newUser->email = $email;
+                $newUser->login = false;
+                $newUser->save();
+
+                //start_session($newUser);
+            } else{
+                echo 'Pseudo déjà utilisé';
+            }
+        } else{
+            //$popIn = file_get_contents('path/to/YOUR/FILE.php');
+            //header('Location: index.php');
+            echo 'Email déjà utilisé !';
+        }
 
         break;
 

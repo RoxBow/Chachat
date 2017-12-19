@@ -13,7 +13,7 @@ function start_session($a_user){
 	if (isset($_POST['pseudo']) && isset($_POST['password'])) {
 
 		// on vérifie les informations du formulaire, à savoir si le pseudo saisi est bien un pseudo autorisé, de même pour le mot de passe
-		if ($a_user->pseudo == $_POST['pseudo'] && $a_user->password == $_POST['password']) {
+		if( $a_user->pseudo == $_POST['pseudo'] && password_verify($_POST["password"] , $a_user->password)) {
 			// dans ce cas, tout est ok, on peut démarrer notre session
 
 			//On dit que l'user est connecté dans la BDD
@@ -21,7 +21,7 @@ function start_session($a_user){
 			$a_user->save();
 			// on enregistre les paramètres de notre visiteur comme variables de session ($login et $pwd) (notez bien que l'on utilise pas le $ pour enregistrer ces variables)
 			$_SESSION['currentUser'] = $a_user;
-			$_SESSION['pseudo'] = $_POST['pseudo'];
+			$_SESSION['pseudo'] = $a_user->pseudo;
 
 			// on redirige notre visiteur vers une page de notre section membre
 			header('Location: index.php?action=room_publique');

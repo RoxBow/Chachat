@@ -32,7 +32,7 @@ Class Akham{
 
         $query = "SELECT * FROM ".$this->table_name." WHERE ".$this->pk." = '".$this->{$this->pk}."'";
         $entity = myFetchAssoc($query);
-
+        var_dump($entity);
         foreach($entity as $field => $value){
             if($field != $this->pk && $field != 'id'){
                 $this->$field = $value;
