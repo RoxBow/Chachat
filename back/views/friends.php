@@ -1,1 +1,0 @@
-<?= $welcome_friends_message ?>

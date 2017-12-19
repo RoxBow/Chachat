@@ -11,7 +11,7 @@ let db = mysql.createConnection({
     user: "root",
     password: "root",
     database : "chat",
-    port: "8889" // port mysql
+    port: "3306" // port mysql
 });
 
 db.connect( (err) => {
