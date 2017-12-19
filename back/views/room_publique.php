@@ -14,7 +14,7 @@
             <h2>Salon</h2>
             <ul class="list-room">
                 <?php
-                    foreach (allEntities('rooms') as $key => $value) {
+                    foreach (Akham::allEntities('rooms') as $key => $value) {
                         if($key === 0){
                             echo '<li class="selected" id="'.$value['nom'].'">'.$value['nom'].'</li>';
                         } else {
@@ -84,7 +84,7 @@
             <?php
                 // display our friends
 	
-                foreach (myFriends($_SESSION['currentUser']) as $value) {
+                foreach ($_SESSION['currentUser']->myFriends() as $value) {
                     if(isset($value['secondUser'])){
                         echo '<li data-name="'.$value['secondUser'].'">'.$value['secondUser'].'
                                 <span title="Supprimer" class="fa fa-times" data-action="delete" aria-label="Supprimer dans ma liste d\'amis"></span>
@@ -111,7 +111,7 @@
 
 <?php
     $currentUser = $_SESSION['pseudo'];
-    $initialRoom = allEntities('rooms')[0]['nom'];
+    $initialRoom = Akham::allEntities('rooms')[0]['nom'];
 ?>
 
 <script>

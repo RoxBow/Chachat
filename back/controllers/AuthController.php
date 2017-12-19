@@ -11,7 +11,7 @@ switch ($action) {
 		$user->pseudo = $pseudonyme;
 		$user->hydrate();  
         
-        foreach (allEntities('users') as $value) {
+        foreach (Akham::allEntities('users') as $value) {
             $pseudo_tab[] = $value['pseudo'];
         }
 
@@ -31,7 +31,7 @@ switch ($action) {
         $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
 
         //Register a new user in database if its a new pseudo & new email
-        foreach (allEntities('users') as $value) {
+        foreach (Akham::allEntities('users') as $value) {
             $pseudo_tab[] = $value['pseudo'];
             $email_tab[] = $value['email'];
         }

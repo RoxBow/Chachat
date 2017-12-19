@@ -46,4 +46,15 @@ Class User extends Akham {
             header ('location: index.php');
         }
     }
+
+    public function myFriends(){
+        $query = "SELECT secondUser FROM friends WHERE firstUser='".$this->pseudo."'";
+        $query2 = "SELECT firstUser FROM friends WHERE secondUser='".$this->pseudo."'";
+        $entity = myFetchAllAssoc($query);
+        $entity2 = myFetchAllAssoc($query2);
+    
+        $allFriends = array_merge($entity, $entity2);
+    
+        return $allFriends;
+    }
 }

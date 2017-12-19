@@ -8,19 +8,19 @@ Class Akham{
     protected $table_name = null;
     protected $fields = [];
 
-    public function __get($attr_name){
-        if(in_array($attr_name, $this->fields)){
-            return $this->$attr_name;
+    public function __get($attrName){
+        if(in_array($attrName, $this->fields)){
+            return $this->$attrName;
         } else{
-            die('illegal field: '.$attr_name);
+            die('illegal field: '.$attrName);
         }
     }
 
-    public function __set($attr_name, $attr_value){ 
-        if(in_array($attr_name, $this->fields)){
-            $this ->$attr_name = $attr_value;
+    public function __set($attrName, $attrValue){ 
+        if(in_array($attrName, $this->fields)){
+            $this ->$attrName = $attrValue;
         } else{
-            die('illegal field: '.$attr_name);
+            die('illegal field: '.$attrName);
         }
     }
 
@@ -70,48 +70,72 @@ Class Akham{
                 
             }
             
-            $query_update = 'UPDATE '.$this->table_name.' SET '.$temp.' WHERE '.$this->pk.' = \''.$this->{$this->pk}.'\'';
-            myQuery($query_update);
+            $queryUpdate = 'UPDATE '.$this->table_name.' SET '.$temp.' WHERE '.$this->pk.' = \''.$this->{$this->pk}.'\'';
+            myQuery($queryUpdate);
         
         // si on a une valeur pour la pk on UPDATE
         } else{
-            $temp_columns = '';
-            $temp_values = '';
+            $tempColumns = '';
+            $tempValues = '';
             
             foreach ($this->fields as $value) {
 
                 if ($value != 'id') {
                     if($value == 'login'){
                         if ($value === end($this->fields)) {
-                            $temp_columns.=$value.'';
-                            $temp_values.= $this->$value ? 'true' : 'false';
+                            $tempColumns.=$value.'';
+                            $tempValues.= $this->$value ? 'true' : 'false';
                         } else{
-                            $temp_columns.=$value.',';
-                            $temp_values.= ($this->$value ? 'true' : 'false').', ';
+                            $tempColumns.=$value.',';
+                            $tempValues.= ($this->$value ? 'true' : 'false').', ';
                         }
                     } else{
                         if ($value === end($this->fields)) {
-                            $temp_columns.=$value.'';
-                            $temp_values.='\''.$this->$value.'\'';
+                            $tempColumns.=$value.'';
+                            $tempValues.='\''.$this->$value.'\'';
                         } else{
-                            $temp_columns.=$value.',';
-                            $temp_values.='\''.$this->$value.'\', ';
+                            $tempColumns.=$value.',';
+                            $tempValues.='\''.$this->$value.'\', ';
                         }
                     }
                 }
 
             }
 
-            $query_insert = 'INSERT INTO '.$this->table_name.' ('.$temp_columns.') VALUES ('.$temp_values.');';
-            myQuery($query_insert);
+            $queryInsert = 'INSERT INTO '.$this->table_name.' ('.$tempColumns.') VALUES ('.$tempValues.');';
+            myQuery($queryInsert);
             
         }
         // si on a pas de valeur pour la pk on INSERT
+    }
+
+    public static function allEntities($tableName){
+        $query = "SELECT * FROM ".$tableName;
+        $entity = myFetchAllAssoc($query);
+        return $entity;
     }
 
     public static function error404($message = 'Page not Found'){
         header("HTTP/1.0 404 Not Found");
         die($message);
     }
+
+    public static function currentUser(){
+        $theCurrentUser;
+
+        if ( isset($_SESSION['currentUser']) ) {
+            $theCurrentUser = $_SESSION['currentUser'];
+        }
+        
+        return $theCurrentUser;
+    }
+
+    public static function allOnline(){
+        $query = "SELECT * FROM users WHERE login = true";
+        $entity = myFetchAllAssoc($query);
+    
+        return $entity;
+    }
+    
 }
 
