@@ -1,11 +1,20 @@
-$(function () {
+$(".wrapper-form").load("./views/login/form_login.html");
 
+if (window.matchMedia('(max-width: 767px)').matches) {
+    $('.li-login').removeClass('selected');
+}
+
+$(function () {
     $('.li-login').on('click', function () {
         loadForm("form_login.html");
     });
 
     $('.li-register').on('click', function () {
         loadForm("form_register.html");
+    });
+
+    $('.li-guest').on('click', function () {
+        $('.wrapper-form').empty();
     });
 
     $('.wrapper-link-home ul li').on('click', function () {
