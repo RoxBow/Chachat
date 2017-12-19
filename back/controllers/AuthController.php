@@ -51,7 +51,7 @@ switch ($action) {
                 $newUser->login = false;
                 $newUser->save();
 
-                //start_session($newUser);
+                start_session($newUser);
             } else{
                 echo 'Pseudo déjà utilisé';
             }
