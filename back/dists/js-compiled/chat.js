@@ -93,7 +93,7 @@ socket.on('sendMessage', msg => {
     if (msg.sender === 'user' && username === currentUser.username) {
         $listMessage.append($('<li class="current-user">').text(msg.content));
     } else {
-        $listMessage.append($('<li><span aria-label="pseudo de l\'utilisateur">' + username + '</span> : ' + msg.content + '</li>'));
+        $listMessage.append($('<li><span aria-label="pseudo de l\'utilisateur">' + username + '</span>' + msg.content + '</li>'));
     }
 });
 
@@ -127,9 +127,9 @@ $("#listUsers").on("click", "li span", function () {
 socket.on('askFriend', ask => {
 
     if (ask.type === "pending") {
-        $listFriend.append('<li class="pending" data-name="' + ask.username + '">' + ask.username + '<span class="fa fa-times" aria-label="Supprimer l\'amis"></span></li>');
+        $listFriend.append('<li class="pending" data-name="' + ask.username + '">' + ask.username + '<span class="fa fa-times" data-action="delete" aria-label="Supprimer l\'amis"></span></li>');
     } else if (ask.type === "answer") {
-        $listFriend.append('<li class="pending" data-name="' + ask.username + '">' + ask.username + '<span class="fa fa-check" aria-label="Accepter l\'amis"></span><span class="fa fa-times" aria-label="Supprimer l\'amis"></span></li>');
+        $listFriend.append('<li class="pending" data-name="' + ask.username + '">' + ask.username + '<span class="fa fa-check" data-action="accept" aria-label="Accepter l\'amis"></span><span class="fa fa-times" data-action="delete" aria-label="Supprimer l\'amis"></span></li>');
     }
 });
 
@@ -149,7 +149,7 @@ socket.on('updateAskFriend', response => {
     if (response.type === "accept") {
         $listFriend.find(`[data-name='${response.username}']`).removeClass('pending').addClass('friend-in');
         $listFriend.find(`[data-name='${response.username}']`).find("[data-action='accept']").remove();
-        $listFriend.find(`[data-name='${response.username}']`).append('<span class="begin-conv">Conv</span>');
+        $listFriend.find(`[data-name='${response.username}']`).append('<span class="fa fa-envelope begin-conv">Conv</span>');
     } else if (response.type === "delete") {
         $listFriend.find(`[data-name='${response.username}']`).remove();
     }
